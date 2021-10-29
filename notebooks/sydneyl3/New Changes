@@ -1,0 +1,21 @@
+Friday - October 29, 2021
+
+Isolation between the solar panel side and the microcontroller/components side
+
+Switch in power system - Left open. Needs to be fixed
+
+Isolate the high current traces to one side of the board
+
+Add bigger VIAs for higher current traces
+
+Thicken traces from 12V --- Remove barrel jack, add a screw terminal
+
+High voltage screw terminals for the solar panel side like a 1x04 + a 1x02 for the output load
+
+Thicken power traces
+
+ACS723 needs GND1
+
+Instead of using schottkey diodes, drivers, decoders, inverters, use a darlington array: ULN2003a
+
+Microcontroller pins drive the signal through the darlington (also has flyback diodes to disspitate the instantaneous voltage change) and power the relays.
