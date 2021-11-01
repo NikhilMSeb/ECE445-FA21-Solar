@@ -1,0 +1,44 @@
+Sydney Li/Sydneyl3 - October 18, 2021 07:24PM
+
+Testing Individual Components
+
+POWER SUBSYSTEM:
+    12V Power Supply:
+      DC Output 12V - May vary ~12V range
+        Step Down Buck Converter (12V to 5V): Constant DC output ~5V range
+        Step Down Buck Converter (12V to 3.3V): Constant DC output ~3.3V range
+    
+MAIN MICROCONTROLLER SUBSYSTEM:
+    SWITCHING SUBSYSTEM:
+        Relay: Open Circuit Test (4 Different Combinations)
+          Input - Solar Panel (DC Input into Relay - DC Output out of Relay)
+              DC (128 Cells) - AD Configuration: Open Ckt Voltage = 85.6V +- 2V DC Output w/ Variability
+              DC (64 Cells) - BC Configuration: Open Ckt Voltage = 42.8V +- 2V DC Output w/ Variability
+              DC (32 Cells) - CD Configuration: Open Ckt Voltage = 21.4V +- 2V DC Output w/ Variability
+              DC (0 Cells) - XX Configuration: Open Ckt Voltage = 0V 
+
+Note: Variability means that dependent on certain conditions, this voltage will change (weather, sun exposure, etc)
+
+    MONITORING SUBSYTEM:
+        Voltage Divider
+           Solar Panel Input: Dependent on which configuration - Output of Relay -> Voltage Divider
+           Current Divider goes before the Voltage Divider
+              - Voltage Divider: Measures Voltage of the Open Ckt Voltage from the Relay (Expect DC Output w/ Variability)
+              - Current Divider: Measures Current of the Cell Configuration - ~mA range (Small DC Current Value w/ Variability)
+    
+    MANUAL CONFIGURATION: 
+        Switches: 
+          Testing: Do the switches operate how we expect? 
+            Does it change which configuration we have? When the configuration is controlled through software, which one takes precedence?
+        
+        ESP32 Wireless Microcontroller:
+          Does this have Wi-Fi Capability enabled?
+          Does it connect to the wireless server that we are creating?
+            - Shut down when threshold values are reached 
+        
+        OLED Display:
+          Does the OLED display output real time voltage, current, and temperature values that we are reading through an oscilloscope, through out voltage and current divider?
+          
+        THERMOCOUPLES:
+          Temperature of different areas on the solar panel
+         

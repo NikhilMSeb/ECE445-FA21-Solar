@@ -1,0 +1,31 @@
+Sydney Li/Sydneyl3 - October 11, 2021 02:19AM
+
+Utilizing a Decoder: SN74HC129DSO16 2-to-4 Decoder
+      - VCC: 5V Input
+      - GND
+      - 2 Inputs: 1A 2A / 1B 2B / 1G 2G
+          - 1A 2A - First bit of control signal from ESP32 I2C
+          - 1B 2B - Second bit of control signal from ESP32 I2C
+          - 1G 2G - GND 
+                Operation: 2 inputs, 4 outputs
+                    - 00: Unused XX configuration (0 cells)
+                    - 01: CD configuration (32 cells)
+                    - 10: BC configuration (64 cells)
+                    - 11: AD configuration (128 cells)
+                        - 1Y0/2Y0: X X (Open Ckt)
+                        - 1Y1/2Y1: C_POS D_NEG = CD (32 cells)
+                        - 1Y2/2Y2: B_POS C_NEG = BC (64 cells)
+                        - 1Y3/2Y3: A_POS D_NEG = AD (128 cells)
+            
+
+ESP32 Pinout:
+
+I2C is a serial communication protocol, so data is transferred bit by bit along a single wire (the SDA line). Like SPI, I2C is synchronous, so the output of bits is 
+synchronized to the sampling of bits by a clock signal shared between the master and the slave. The clock signal is always controlled by the master.
+
+  - Planning on utilize I2C pins to program the 2 inputs to the decoder
+      - Pinout depending on the specific ESP32 Devboard Model we decide to use
+          - https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
+          - Based: Pins 16-33 work well for ADC/DAC input/output
+            - Program 2 pins for decoder input (Code I2C capability)
+            

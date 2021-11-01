@@ -1,0 +1,52 @@
+Sydney Li/Sydneyl3 - October 8, 2021 11:04PM
+
+ESP32 Pin Layout (https://components101.com/sites/default/files/component_datasheet/ESP32%20Datasheet.pdf)
+
+Input/output
+39 digital Pins on the ESP32 out of which 34 can be used as GPIO and the remaining are input only pins. 
+    - 18-channels for 12-bit ADC 
+    - 2-channel for 8-bit DAC
+    - 16 channels for PWM signal generation  
+    - 10 GPIO pins supports capacitive features
+  - The ESP32 has multiplexing feature, this enables the programmer to configure any GPIO pin for PWM or other serial communication through program
+  - The ESP32 supports 3 SPI Interface, 3 UART interface, 2 I2C interface, 2 I2S interface and also supports CAN protocol.
+
+3 UART interface: The ESP32 supports 3 UART interface for TTL communication. This would require 3 sets of Rx and Tx pins. All the 6 pins are software configurable and hence any GPIO pin can be programmed to be used for UART.
+External Interrupt: Again since the ESP32 supports multiplexing any GPIO pin can be programmed to be used as an interrupt pin.
+GPIO23 (MOSI), GPIO19(MISO), GPIO18(CLK) and GPIO5 (CS): These pins are used for SPI communication. ESP32 supports two SPI, this is the first set.
+GPIO13 (MOSI), GPIO12(MISO), GPIO14(CLK) and GPIO15 (CS): These pins are used for SPI communication. ESP32 supports two SPI, this is the second set.
+GPIO21(SDA), GPIO22(SCL): Used for IIC communication using Wire library.
+Reset Pin: The reset pin for ESP32 is the Enable (EN) pin. Making this pin LOW, resets the microcontroller.
+
+
+
+Connecting ESP32 with our Relay Configuration
+  - Utilizing an Automotive Catalog Dual 2-Line To 4-Line Decoders/Demultiplexers
+      - MUX Datasheet: https://www.ti.com/lit/ds/symlink/sn74hc139-q1.pdf?ts=1633760158181&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FSN74HC139-Q1
+
+2 inputs - 4 outputs - 1 control signal (ESP32)
+
+Solar Panels -> 6 pin screw on PCB ->  3 FTR-J2 Series Relays -> MCP1407 High Speed Power MOSFET Drivers -> SN74HC139-Q1 2-to-4 MUX ->  ESP32
+
+Input of the MUX will be the current sensor 
+  - 2 inputs (4 possible configurations - AD (128 cells), BC (64 cells), CD (32 cells), XX (0 cells))
+    - Relay Output & Interface Output
+        - Relay Datasheet: https://www.fcl.fujitsu.com/downloads/MICRO/fcai/relays/ftr-j2.pdf
+    - Control signal from ESP 32 & Manual Switch override will have to dictate configuration that inputs into current sensor
+        - If utilizing manual switch configuration - involved programming to determines which signal is read
+
+- Solar Panel output connects to the current sensor prior to going through the voltage sensor (divider)
+    - ACS723 Current Sensor
+    
+    
+MCP4725 Breakout Board - 12-Bit DAC w/I2C Interface
+    - DAC Datasheet: http://ww1.microchip.com/downloads/en/devicedoc/22039d.pdf
+- Can connect two of these DACs on one I2C bus
+- Pin of one high to keep it from conflicting
+- Included is a 6-pin headerfor use in a breadboard
+- Works with both 3.3V or 5V logic
+
+
+
+
+
