@@ -16,7 +16,12 @@
 [10/05/2021: Design Document Review Session](#10052021-design-document-review-session) \
 [10/11/2021: Research for Pathway for Remote Configuration](#10112021-research-for-pathway-for-remote-configuration) \
 [10/19/2021: Post Design Submission Update Meeting with TA](#10192021-post-design-submission-update-meeting-with-ta) \
-[10/23/2021: Compiling Research into Django Framework and Data Visualization](#10232021-compiling-research-into-django-framework-and-data-visualization)
+[10/23/2021: Compiling Research into Django Framework and Data Visualization](#10232021-compiling-research-into-django-framework-and-data-visualization) \
+[10/25/2021 - 10/26/2021: Django Framework Design and Coding](#10252021---10262021-django-framework-design-and-coding) \
+[10/29/2021: Completing Design for Django Back-end and Microcontroller Programming](#10292021-completing-design-for-django-back-end-and-microcontroller-programming) \
+[10/31/2021 - 11/01/2021: Individual Progress Report Completion](#10312021---11012021-individual-progress-report-completion) \
+[11/04/2021: Real-time Django Data Updates Research](#11042021-real-time-django-data-updates-research) \
+[11/08/2021: ESP-32 Wireless Capabilities Programming](#11082021-esp-32-wireless-capabilities-programming) 
 
 ## 08/26/2021 - 08/29/2021: Team Finding 
 **Objectives:** Find a team and establish line of communication. Finalize an idea and approach to groupwork, as well as begin working on RFA. 
@@ -180,3 +185,34 @@ Note: We had a follow-up meeting on 10/22/2021 that covered and clarified simila
 * Chart JS is a Javascript charting tool that can also be used for visualization: https://www.chartjs.org/
 
 The next steps now are to plan out the exact design of my front-end. TA Evan also mentioned it would be a good idea to develop a diagram/visualization of all the Django modules that will be used as a graph for design reviews. 
+
+## 10/25/2021 - 10/26/2021: Django Framework Design and Coding
+**Objectives:** Finish designing the Django framework for the project; Complete coding out as much of the front-end as possible; Begin working on back-end
+
+**Outcome:** To begin implementing the software side of our project, I thought the best place to start was the Django framework since it would encompass both our front-end and back-end, and we have not received our microcontrollers yet either. Using all of the resources that I have compiled so far in this Notebook, I was able to complete the following Django applications within the overall Django project for our interface idea:
+* "research-portal"
+* "panels"
+* "users"
+* "team"
+
+All of this, 
+
+## 10/29/2021: Completing Design for Django Back-end and Microcontroller Programming 
+**Objectives:** Follow up to front-end work by completing design plan for the rest of the Django framework; Complete design of wireless microcontroller programming 
+
+**Outcome:** Since the entire skeleton of the front-end was now set up, I wanted to plan in advance for the other two primary components of the software side of the project - the Django back-end functionality and communication network with the microcontroller (ESP-32). 
+
+## 10/31/2021 - 11/01/2021: Individual Progress Report Completion 
+**Objectives:** Compile all the work I have done personally so far and submit the Individual Progress Report assignment 
+
+**Outcome:** 
+
+## 11/04/2021: Real-time Django Data Updates Research
+**Objectives:** Plan how to implement the real-time updates for monitored panel data with regarsd to the Django framework 
+
+**Outcome:** Following discussion with our TA Evan about the software work done so far, one concern that was brought up was that I have not planned specific details regarding the how I would handle real-time data and update the front-end with it. 
+
+## 11/08/2021: ESP-32 Wireless Capabilities Programming 
+**Objectives:** Implement as much of the wireless capabilities as planned for the microcontroller (ESP-32)
+
+**Outcome:** While the goal was to have everything ready to begin testing HTTP commands to and from the microcontroller since I now had it in hand, I unfortunately ran into issues with our board itself since this was the first time I have used the ESP-32. 
