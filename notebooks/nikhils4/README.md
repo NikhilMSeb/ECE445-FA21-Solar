@@ -256,3 +256,8 @@ Following this, we can use the *HTTPClient* library to work out the specifics of
 In the end, I was able to program the ESP-32 to recognize and connect to a Wi-Fi network, and I could also set up the code for the HTTP command channel to and from the board. The following image is a screenshot of the basic test outcome of the microcontroller's serial communications after enabling Wi-Fi features successfully: \
 ![image](https://user-images.githubusercontent.com/46250395/141004470-d47025bb-1e4c-42a8-8139-d50deeedcbe1.png) \
 I now need to work on completing configuring the HTTP network functionalities on both the microcontrollers. I have already setup the Postman API for testing the same once the code is ready and executing on the IDE. 
+
+## 11/nn/2021: Completing ESP-32 Stand-alone Wireless Programming 
+**Objectives:** Finish writing the code for the 2-way POST capabilities of the microcontroller 
+
+**Outcome:** 
