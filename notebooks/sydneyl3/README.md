@@ -9,7 +9,8 @@
 [09/13/2021: First TA Meeting](#09132021-first-ta-meeting) \
 [09/14/2021 - 09/15/2021: Microcontroller Research and Design Proposal](#09142021---09152021-microcontroller-research-and-design-proposal) \
 [09/17/2021: ESP32 Microcontroller](#09172021-esp32-microcontroller) \
-[9/22/2021 - 09/26/2021: First Design Document Draft](#09222021---09262021-first-design-document-draft)
+[09/22/2021 - 09/26/2021: First Design Document Draft](#09222021---09262021-first-design-document-draft) \
+[09/27/2021 - Design Document Check and Rooftop Visit] (#09272021-design-document-and-rooftop-visit)
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
@@ -138,3 +139,31 @@ I also updated our block diagram to specify our subsystems a bit more and to ide
    * DC-AC Power Inverter - Transfers AC power to the external load (Must be load independent)
             
 The uploaded first draft of the Design Document for our project can be found on the ECE 445 Projects page (Team #10) [here](https://courses.engr.illinois.edu/ece445/getfile.asp?id=19521)
+
+
+## 09/27/2021: Design Document Check and Rooftop Visit
+**Objectives:** Meet with Professor Schuh and other TAs to discuss our design document progress and further improvements that we can make prior to the design review. Also observe the solar panels on the ECEB rooftop and observe the inputs that will be going into our box and a 12V supply that we will be using. Understand how the boxes will be mounted and which external load the smart interface box will supply. 
+
+**Outcome:** During our design document check with Professor Jonathon Schuh, TA's David Null and Bonhyun Ku, we were able to receive very good feedback on our design document.
+The following changes that need to be made include: 
+* Have more distinguished subsystems in our block diagram and make it easier for an engineer to look at the block diagram and understand how the design flow operates
+* Provide more specific details on our high level requirements such as a
+* Include a tolerance range with voltage, current, and temperature readings when testing in our Requirements and Verifications table
+* Create a better visual aid in which we can understand how the boxes are mounted onto each panel (After the rooftop visit, we have an understanding on how we can visually represent that)
+* Do not use green at all to represent the power flow in the block diagram as it may not be visible on a presentation
+* Draft more of the PCB design schematics prior to our PCB board reviews
+* Have multiple references cited in IEEE format (around 20 is expected)
+* Reformat the tolerance analysis 
+* Ensure that each image has a figure attached on the bottom and that tables have a caption
+
+As for the rooftop visit guided by Kevin Colravy, he was able to take us to observe the dummy boxes that they had already attached to the solar panels. They created boards solely used for configuring the solar panels and these boards consist of the relay configuration that professor Banerjee suggested we utilize in our own project. There are 10 dummy boxes are already attached to the solar panels but are currently not harvesting energy to the grid. As for the external load that we will be supplying, it is purely a passive load mainly composed of resistors so output behavior can be observed and there is no storage capability so although they have the capability of transferring power to the grid, this functionality is not currently active.
+
+As for adding more details to our PCB design, we are looking for specific parts such as a buck converter when creating our power subsystem (some considerations):
+* HiLetgo 5pcs DC-DC 12V to 3.3V 5V Power Module 3.3V 5V 12V Multi Output Voltage Conversion 
+   * Converts a 12V dc input to 2 separate 3.3V and 5V dc outputs
+* Originally Considering XL7015 dc-dc buck converter module but it converts a maximum voltage rating of 80V to 5V. 2 Issues:
+   * The open circuit voltage when operating at 128 cells exceeds 80V (85.6V)
+   * There is no option to step down to 3.3V as needed for input voltage for the temperature sensor
+
+With additional research on the full capabilities of the Allegro ACS723 current sensor. It uses a Hall effect sensor to output a voltage relative to the current flowing through the IP+ and IP- pins on the board. The advantage of using a Hall effect sensor, specifically, is that the circuit being sensed and the circuit reading the sensor are electrically isolated meaning that, although your Arduino is running on 5V, the sensed circuit can be operating at higher DC or AC voltages. The Current Sensor Breakout measures both DC and AC currents all the way up to 5A, has full electrical isolation of measured and sensed circuits, and has a base sensitivity of 400mV/A. Although the analog output is adjustable to 80kHz, the bandwidth on the ACS723 Sensor Breakout width filter has been set to 20kHz to reduce noise when using at high gains. The full 80KHz bandwidth that the sensor is capable of can be recovered by closing the JP1 (Bandwidth Select) jumper on the back of the board.
+* Note: Although the chip itself is rated for up to 2.4kV (RMS) of isolation, the board has not been designed for such high voltage applications.
