@@ -83,24 +83,24 @@ I also updated our block diagram to specify our subsystems a bit more and to ide
 
 **Outcome:** 
 * [ESP32](https://cdn.sparkfun.com/datasheets/IoT/esp32_datasheet_en.pdf) 
-+* Wireless Microcontroller (ESP32 MCU): Wi-Fi Connectivity within a large radius. Operates at a temperature range from -40°C to 105°C. 
-++* Performs more accurate DC voltage measurements (Analog to Digital Converters with Higher Resolution) - Eighteen 12-bit ADCs
-++* Replaced our original design of utilizing an arduino for analog to digital conversion to measure voltage and current 
-+* Power Subsystem consists of a Step-Down Buck Converter: Utilized to step down the DC-DC voltage to power up 3.3V/5V LEDs, switches, etc. 
-+* Does Digital to Analog and Analog to Digital Conversion
+  * Wireless Microcontroller (ESP32 MCU): Wi-Fi Connectivity within a large radius. Operates at a temperature range from -40°C to 105°C. 
+    * Performs more accurate DC voltage measurements (Analog to Digital Converters with Higher Resolution) - Eighteen 12-bit ADCs
+    * Replaced our original design of utilizing an arduino for analog to digital conversion to measure voltage and current 
+  * Power Subsystem consists of a Step-Down Buck Converter: Utilized to step down the DC-DC voltage to power up 3.3V/5V LEDs, switches, etc. 
+  * Does Digital to Analog and Analog to Digital Conversion
 * [ESP8266](https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf)
-+* Few GPIO pins in which if we utilize a lot of hardware, we will run out of pins
-+* 4MB of data storage (unnecessary for our project)
+  * Few GPIO pins in which if we utilize a lot of hardware, we will run out of pins
+  * 4MB of data storage (unnecessary for our project)
 * [WINC1500](https://media.digikey.com/pdf/Data%20Sheets/Microchip%20PDFs/ATWINC15x0.pdf)
-+* Low power mobile applications
-++* Features: Power amplifier, LNA, Switch and Power Management
-++* On chip microcontroller and integrated flash memory for system software
+  * Low power mobile applications
+    * Features: Power amplifier, LNA, Switch and Power Management
+    * On chip microcontroller and integrated flash memory for system software
 * [Panasonic PAN9520](https://www.mouser.com/pdfDocs/WMPAN9520ProductSpecification.pdf)
-+* Many features that we don't need
-++* High performance CPU, high sensitivity wireless radio, baseband processor, etc.
-++* Out of stock
-++* 2.4 GHz WiFi
-++* Supports 20MHz and 40MHz bandwidths in 2.4GHz band 
+   * Many features that we don't need
+    * High performance CPU, high sensitivity wireless radio, baseband processor, etc.
+    * Out of stock
+    * 2.4 GHz WiFi
+    * Supports 20MHz and 40MHz bandwidths in 2.4GHz band 
 
 **Safety Concerns:**
 * Arc Flashes - Flash Burn and Blast Hazards
