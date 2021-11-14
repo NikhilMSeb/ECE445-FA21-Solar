@@ -1,7 +1,7 @@
 # ECE 445 Lab Notebook: Sydney Li
 
 ## Entries 
-[08/24/2021: Project Ideas and Team Finding](#08242021-design-document-review-session) \
+[08/24/2021: Project Ideas and Team Finding](#08242021-project-ideas-and-team-finding) \
 [08/25/2021: Gathering Additional Information](#08252021-gathering-additional-information) \
 [08/30/2021: Finding a Third Member](#08302021-finding-a-third-member) \
 [09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee) \
