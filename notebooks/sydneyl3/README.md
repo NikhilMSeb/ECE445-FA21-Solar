@@ -1,10 +1,10 @@
 # ECE 445 Lab Notebook: Sydney Li
 
 ## Entries 
-[08/24/2021: Project Ideas and Team Finding](#08242021-design-document-review-session)
-[08/25/2021: Gathering Additional Information](#08252021-gathering-additional-information) 
-[08/30/2021: Finding a Third Member](#08302021-finding-a-third-member)
-[09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee)
+[08/24/2021: Project Ideas and Team Finding](#08242021-design-document-review-session) \
+[08/25/2021: Gathering Additional Information](#08252021-gathering-additional-information) \ 
+[08/30/2021: Finding a Third Member](#08302021-finding-a-third-member) \
+[09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee) \
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -32,7 +32,7 @@
 
 **Outcome:** We were able to meet in Professor Banerjee's office and he mentioned a few things for our project that we should be aware. Prior to the meeting, we understood that there had been a design done during the Fall 2019 semester by a group of students. The issue is that when another senior design group tried to built upon their project, it was a mess because of poor documentation. Therefore, he emphasized that good documentation for our project must be done so in the event that the design is not incomplete or to be improved upon, there will be another group of students who can understand the documentation and to built the project themselves. Another thing is that in order to encourage creativity, we will not be basing our design on the past design as it will bias our thinking and we may run into the issue with scalability again. One thing that I had clarified that I did not know before is that I was under the impression that it would be one interface box responsible for communicating multiple solar panel information but there will be 60 boxes mounted on each solar panel but the scability issue comes from collectively representing multiple solar panel data on the website. He also mentioned that if we go above and beyond with the features we implement, we could possibly implement drones to take thermal images of the solar panels on the roof to provide snapshot data for the users that will use the website from the atrium. 
 
-Key Takeaways: 
-+* Build our project from scratch without prior information to encourage creativity
-+* The scalability and wireless connectivity is a key requirement 
-+* If these features can be implemented, we can possibly add some more advanced features such as drone thermal imaging
++Key Takeaways: 
+* Build our project from scratch without prior information to encourage creativity
+* The scalability and wireless connectivity is a key requirement 
+* If these features can be implemented, we can possibly add some more advanced features such as drone thermal imaging
