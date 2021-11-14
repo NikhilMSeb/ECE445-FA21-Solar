@@ -10,7 +10,7 @@
 [09/14/2021 - 09/15/2021: Microcontroller Research and Design Proposal](#09142021---09152021-microcontroller-research-and-design-proposal) \
 [09/17/2021: ESP32 Microcontroller](#09172021-esp32-microcontroller) \
 [09/22/2021 - 09/26/2021: First Design Document Draft](#09222021---09262021-first-design-document-draft) \
-[09/27/2021 - Design Document Check and Rooftop Visit] (#09272021-design-document-and-rooftop-visit)
+[09/27/2021 - Design Document Check and Rooftop Visit](#09272021-design-document-and-rooftop-visit)
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
