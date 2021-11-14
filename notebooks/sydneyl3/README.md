@@ -5,7 +5,7 @@
 [08/25/2021: Gathering Additional Information](#08252021-gathering-additional-information) \
 [08/30/2021: Finding a Third Member](#08302021-finding-a-third-member) \
 [09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee) \
-[09/08/2021: Solar Panel Research](#09082021-solar-panel-research) 
+[09/08/2021: Solar Panel Research](#09082021-solar-panel-research) \
 [09/13/2021: First TA Meeting](#09082021-first-ta-meeting) 
 
 
