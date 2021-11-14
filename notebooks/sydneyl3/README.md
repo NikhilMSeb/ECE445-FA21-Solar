@@ -4,7 +4,8 @@
 [08/24/2021: Project Ideas and Team Finding](#08242021-design-document-review-session) \
 [08/25/2021: Gathering Additional Information](#08252021-gathering-additional-information) \
 [08/30/2021: Finding a Third Member](#08302021-finding-a-third-member) \
-[09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee) 
+[09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee) \
+[09/08/2021: Solar Panel Research](#09082021-solar-panel-research) 
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -38,3 +39,13 @@
 * Build our project from scratch without prior information to encourage creativity
 * The scalability and wireless connectivity is a key requirement 
 * If these features can be implemented, we can possibly add some more advanced features such as drone thermal imaging
+
+
+## 09/08/2021: Solar Panel Research
+**Objectives:** Brainstorm ideas about the design and research ratings for the solar panels
+
+**Outcome:** Since the smart interface requires wireless capability, we will need a microcontroller that is able to wirelessly communicate. I am looking into possible microcontrollers that we can use while also being able to have voltage reading capability. Professor Banerjee mentioned that he wanted a more advanced protocol than just arduino to build the website. As the solar panel will connect to the external load, we will need an inverter if that load is an AC grid. A power converter to handle those ratings is necessary and therefore, it is important to understand the max ratings that we can expect to receive with the panel. Professor Banerjee said that to configure the different cells for the solar panel, they are utilizing relays and already have a relay subsystem built to use since the relays are already purchased and can withstand the high voltage from the solar panels. A relay is an switch that closes when the coil is energized and producing an electromagnetic field to close the switch.
+
+* Solar Panel Ratings
+
+![sunpower spr-425e-wht-d](https://user-images.githubusercontent.com/90663938/141672162-b9f2ac50-934e-4f17-a0ef-c0bae72b0dfb.png)
