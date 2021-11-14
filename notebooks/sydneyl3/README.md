@@ -158,6 +158,9 @@ The following changes that need to be made include:
 
 As for the rooftop visit guided by Kevin Colravy, he was able to take us to observe the dummy boxes that they had already attached to the solar panels. They created boards solely used for configuring the solar panels and these boards consist of the relay configuration that professor Banerjee suggested we utilize in our own project. There are 10 dummy boxes are already attached to the solar panels but are currently not harvesting energy to the grid. As for the external load that we will be supplying, it is purely a passive load mainly composed of resistors so output behavior can be observed and there is no storage capability so although they have the capability of transferring power to the grid, this functionality is not currently active.
 
+* Dummy Board Utilized Solely for Configuring the Solar Panels:
+![attabox](https://user-images.githubusercontent.com/90663938/141702144-4f6112eb-5176-4c45-9cea-a75aaba3823a.jpg)
+
 As for adding more details to our PCB design, we are looking for specific parts such as a buck converter when creating our power subsystem (some considerations):
 * HiLetgo 5pcs DC-DC 12V to 3.3V 5V Power Module 3.3V 5V 12V Multi Output Voltage Conversion 
    * Converts a 12V dc input to 2 separate 3.3V and 5V dc outputs
