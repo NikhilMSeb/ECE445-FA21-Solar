@@ -114,58 +114,27 @@ I also updated our block diagram to specify our subsystems a bit more and to ide
 ## 09/22/2021 - 09/26/2021: First Design Document Draft
 **Objectives:** Complete our first draft of the design document and add any missing information so that the ECE445 course staff can evaluate and provide us with feedback in order to improve our design.
 
-**Outcome:** I was able to do more research about the design structure for the individual subsystems and provided the requirements and verifications for all the hardware aspect of the project. I created a first draft of the PCB schematic so that we have some notion of the parts we may need. The cost analysis was also done when I was considering the base parts that we would need for the structure of the project. Other passive compoenents are missing at the moment and will be added upon and updated as we work through more of the PCB schematic. 
+**Outcome:** I was able to do more research about the design structure for the individual subsystems and provided the requirements and verifications for all the hardware aspect of the project. I created a first draft of the PCB schematic so that we have some notion of the parts we may need. The cost analysis was also done when I was considering the base parts that we would need for the structure of the project. Other passive compoenents are missing at the moment and will be added upon and updated as we work through more of the PCB schematic. To demonstrate that we can have 2 interface boxes that can communicate with one another and that the project can be scaled up to multiple panels, our costs would have essentially doubled meaning that we would need to buy 2 of everything.
 
 * First PCB Schematic Draft:
 ![firstdraftPCB](https://user-images.githubusercontent.com/90663938/141699674-7f6bbb78-1827-41ce-8c2c-f2e1f881db0d.png)
 
 * 3 High-Level Requirements: 
- * Interactive Web Design
- * Wireless Communication Capability with the Solar Panels
- * Scalability
+   * Interactive Web Design
+   * Wireless Communication Capability with the Solar Panels
+   * Scalability
 * Subsystem Requirement: 
- * Manual Switch Control
+   * Manual Switch Control
 
 * Different Components & Subsystems
- * External 12V Power Supply Unit:
- * Power Subsystem: DC-DC Converter (Possibly a step-down buck converter)
- * Wireless Microcontroller - Control system (Monitors Voltage/Current, communicates that data to our external display, etc.)
- * LED or Hexadecimal Display - Displays whether a wireless connection has been established. Whether power is being integrated into the grid
- * Thermocouples - Monitors the temperature of the panels
- * Switches - Providing external control toward the interface box
- * Monitoring Subsystem - Retrieves voltage/current data from the panels. If overvoltage/overcurrent occurs, implements safety precautions and shuts down completely
- * Communication Subsystem - Capability of interfacing with multiple solar panels. Be able to select the combination of cells to output to the interface (32/64/128 cells)
- * DC-AC Power Inverter - Transfers AC power to the external load (Must be load independent)
+   * External 12V Power Supply Unit:
+   * Power Subsystem: DC-DC Converter (Possibly a step-down buck converter)
+   * Wireless Microcontroller - Control system (Monitors Voltage/Current, communicates that data to our external display, etc.)
+   * LED or Hexadecimal Display - Displays whether a wireless connection has been established. Whether power is being integrated into the grid
+   * Thermocouples - Monitors the temperature of the panels
+   * Switches - Providing external control toward the interface box
+   * Monitoring Subsystem - Retrieves voltage/current data from the panels. If overvoltage/overcurrent occurs, implements safety precautions and shuts down completely
+   * Communication Subsystem - Capability of interfacing with multiple solar panels. Be able to select the combination of cells to output to the interface (32/64/128 cells)
+   * DC-AC Power Inverter - Transfers AC power to the external load (Must be load independent)
             
-**Cost Analysis:**
-To demonstrate that we can have 2 interface boxes that can communicate with one another and that the project can be scaled up to multiple panels, our costs would have essentially doubled meaning that we would need to buy 2 of everything:
-
-Part Name                            -     Vendor     -     Vendor Part #                -     Manufacturer Part #   -   Quantity   -     Total
-
-EVAL BOARD FOR ESP-WROOM-32          -     DigiKey    -     1965-1000-ND                 -     ESP32-DEVKITC-32D     -     2        -     $10.00 x 2 = $20.00
-SENSOR CURRENT HALL 20A DC           -     DigiKey    -     SEN-13679 ROHS               -     ACS723LLCTR-20AU-T    -     2        -     $4.46 x 2 = $8.92
-GROVE - OLED DISPLAY 0.96" (SSD1)    -     DigiKey    -     1597-104020208-ND            -     104020208             -     2        -     $4.30 x 2 = $8.60
-WATERPROOF DS18B20 DIGITAL TEMPE     -     DigiKey    -     1528-1592-ND                 -     381                   -     6        -     $9.95 x 6 = 59.7
-DIODE SCHOTTKY 40V 3A SMA            -     DigiKey    -     340A-FDICT-ND                -     B340A-13-F            -     6        -     $0.47 x 6 = $2.82
-IC REG LIN POS ADJ 800MA SOT223      -     DigiKey    -     LM1117IMPX-ADJ/NOPBCT-ND     -     M1117IMPX-ADJ/NOPB    -     4        -     $1.41 x 4 = $5.64
-CAP ALUM 47UF 20% 25V SMD            -     DigiKey    -     493-9423-1-ND                -     UCW1E470MCL1GS        -     6        -     $0.54 x 6 = $3.24
-CAP CER 10UF 25V X5R 0805            -     DigiKey    -     587-2985-1-ND                -     TMK212BBJ106KG-T      -     6        -     $0.21 x 6 = $1.26
-CAP CER 0.1UF 50V X7R 0603           -     DigiKey    -     311-1344-1-ND                -     CC0603KRX7R9BB104     -     8        -     $0.10 x 8 = $0.80
-CAP CER 1000PF 25V X7R 0603          -     DigiKey    -     311-3994-1-ND                -     CC0603JRX7R8BB102     -     2        -     $0.10 x 2 = $0.20
-RES SMD 240 OHM 1% 1/10W 0603        -     DigiKey    -     YAG3582CT-ND                 -     AC0603FR-07240RL      -     4        -     $0.10 x 4 = $0.40
-RES SMD 1K OHM 1% 1/10W 0603         -     DigiKey    -     311-1KLDCT-ND                -     AC0603FR-071KL        -     6+4+4    -     $0.10 x 14 = $1.40
-RES SMD 390 OHM 1% 1/10W 0603        -     DigiKey    -     311-390HRCT-ND               -     RC0603FR-07390RL      -     2        -     $0.10 x 2 = $0.20
-RES SMD 4.7K OHM 1% 1/10W 0603       -     DigiKey    -     YAG3613CT-ND                 -     AC0603FR-074K7L       -     2        -     $0.10 x 2 = $0.20
-RES SMD 150K OHM 1% 1/10W 0603       -     DigiKey    -     YAG3567CT-ND                 -     AC0603FR-07150KL      -     2        -     $0.10 x 2 = $0.20
-RES SMD 10K OHM 1% 1/10W 0603        -     DigiKey    -     311-10KLMCT-ND               -     AF0603FR-0710KL       -     6+6+8    -     $0.10 x 20 = $2.00
-RES 133K OHM 1% 1/10W 0603           -     DigiKey    -     RMCF0603FT133KCT-ND          -     RMCF0603FT133K        -     2        -     $0.10 x 2 = $0.20
-LED GREEN CLEAR 0603 SMD             -     DigiKey    -     732-4980-1-ND                -     150060VS75000         -     4        -     $0.15 x 4 = $0.60
-DEPEPE 2.54mm Pin Headers            -     Amazon     -   DE37566                        -     0710280337566         -     1        -     $5.39
-Primary PCB                          -     PCBWay                                                                    -     2        -     $4.90 x 2 = $9.80
-Weather Proof Enclosure              -     Amazon                                                                    -     2        -     $30.99 x 2 = $61.98
-Cable Glands                         -     Amazon                                                                    -     16       -     $0.40 x 16 = $6.40
-MC4 Connectors                       -     Amazon                                                                    -     12       -     $9.99/6 x 2 = $19.98
-
-Total                                                                                                                               -   = $219.93
-
-The uploaded first draft of the Design Document for our project can be found on the ECE 445 Projects page (Team #10) [here](https://courses.engr.illinois.edu/ece445/projects.asp)
+The uploaded first draft of the Design Document for our project can be found on the ECE 445 Projects page (Team #10) [here](https://courses.engr.illinois.edu/ece445/getfile.asp?id=19521)
