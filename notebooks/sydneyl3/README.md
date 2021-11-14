@@ -7,8 +7,8 @@
 [09/01/2021: First Meeting With Professor Banerjee](#09012021-first-meeting-with-professor-banerjee) \
 [09/08/2021: Solar Panel Research](#09082021-solar-panel-research) \
 [09/13/2021: First TA Meeting](#09132021-first-ta-meeting) \
-[09/14/2021 - 09/15/2021: Microcontroller Research and Design Proposal](#09142021---09152021-microcontroller-research-and-design-proposal) 
-
+[09/14/2021 - 09/15/2021: Microcontroller Research and Design Proposal](#09142021---09152021-microcontroller-research-and-design-proposal) \
+[09/17/2021: ESP32 Microcontroller](#09132021-esp32-microcontroller) 
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
@@ -68,7 +68,7 @@
 **Outcome:** When doing research upon similar projects monitoring voltage and current from solar panels, I found multiple different MPPT projects utilized to charge lithium batteries. Some similar ones are linked below: 
 * [IoT Based Solar Panel Power Monitoring using ESP32 and ThingSpeak](https://circuitdigest.com/microcontroller-projects/iot-solar-panel-power-monitoring-system-using-esp32-and-thingspeak)
 * [DIY 1kW Arduino MPPT Solar Charge Controller (WiFi ESP32)](https://www.instructables.com/DIY-1kW-MPPT-Solar-Charge-Controller/)
-* [DIY Solar Panel Monitoring System - V1.0](https://www.instructables.com/DIY-Solar-Panel-Monitoring-System-V10/)
+* [DIY Solar Panel Monitoring System - V1.0](https://www.instructables.com/DIY-Solar-Panel-Monitoring-System-V10/) \
 The general consensus when choosing a microcontroller best suited for the needs of monitoring multiple solar panel parameters at a low cost was the ESP32 microcontroller which is what we decided to use. The ESP32 has IoT-enabled application and it will be able to process the data from its analog pins and send the data via any kind of connection protocol such as Wi-Fi or to the cloud server. We specifically selected ESP32 as it is a low-cost microcontroller with tons of features. Also, it has a built-in Wi-Fi radio through which we can connect to the internet very easily.
 The second order of business is to understand how voltage and current are going to be read from the solar panels. Since the voltage from the solar panel can be as high as 85.6V in our case, we need a voltage divider to step down the voltage so that the voltage divider output voltage should not exceed the microcontroller maximum I/O voltage (3.3V for ESP32). The output value will be read with one of the analog inputs of Arduino and its analogRead() function. That function outputs a value between 0 and 4095 that is 3.3/4095 for each increment. For current sensing, we can utilize the [Allegro ACS723 current sensor IC](https://www.allegromicro.com/en/products/sense/current-sensor-ics/zero-to-fifty-amp-integrated-conductor-sensor-ics/acs723). It's an economical and precise solution for AC or DC current sensing and good for space constrained applications while also saving costs due to reduced board area. It's typical applications includes overcurrent fault protection which is a key feature of our project.
 I also updated our block diagram to specify our subsystems a bit more and to identify which lines represent data or power. The high level requirements I thought that the project should have would be to involve the accuracy of monitoring the solar panel parameters along with wireless capability and scability. I also included what we can expect out of each of the subsystems within the block diagram and specified a bit more of what parts should be included in each. The final document that we put together and submitted can be found within this repository [here](https://github.com/NikhilMSeb/ECE445-FA21-Solar/blob/main/team%20documents/ECE%20445%20Proposal.pdf)
@@ -76,3 +76,35 @@ I also updated our block diagram to specify our subsystems a bit more and to ide
 * Second Block Diagram Draft
 
 ![secondblockdiagram](https://user-images.githubusercontent.com/90663938/141697489-16ffa2aa-c1be-4e55-9aec-15350265f8aa.png)
+
+
+## 09/17/2021: ESP32 Microcontroller
+**Objectives:** Research more specific details and benefits using the ESP32 microcontroller over other microcontrollers. Possible safety concerns will also be crucial to consider when working with high voltages. 
+
+**Outcome:** 
+* [ESP32](https://cdn.sparkfun.com/datasheets/IoT/esp32_datasheet_en.pdf) 
++* Wireless Microcontroller (ESP32 MCU): Wi-Fi Connectivity within a large radius. Operates at a temperature range from -40°C to 105°C. 
+++* Performs more accurate DC voltage measurements (Analog to Digital Converters with Higher Resolution) - Eighteen 12-bit ADCs
+++* Replaced our original design of utilizing an arduino for analog to digital conversion to measure voltage and current 
++* Power Subsystem consists of a Step-Down Buck Converter: Utilized to step down the DC-DC voltage to power up 3.3V/5V LEDs, switches, etc. 
++* Does Digital to Analog and Analog to Digital Conversion
+* [ESP8266](https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf)
++* Few GPIO pins in which if we utilize a lot of hardware, we will run out of pins
++* 4MB of data storage (unnecessary for our project)
+* [WINC1500](https://media.digikey.com/pdf/Data%20Sheets/Microchip%20PDFs/ATWINC15x0.pdf)
++* Low power mobile applications
+++* Features: Power amplifier, LNA, Switch and Power Management
+++* On chip microcontroller and integrated flash memory for system software
+* [Panasonic PAN9520](https://www.mouser.com/pdfDocs/WMPAN9520ProductSpecification.pdf)
++* Many features that we don't need
+++* High performance CPU, high sensitivity wireless radio, baseband processor, etc.
+++* Out of stock
+++* 2.4 GHz WiFi
+++* Supports 20MHz and 40MHz bandwidths in 2.4GHz band 
+
+**Safety Concerns:**
+* Arc Flashes - Flash Burn and Blast Hazards
+* Electric Shock, with particular scrutiny on faulty wiring as well 
+* Falls - due to the location itself of the solar panels for this project (ECEB roof)
+* Thermal Burn Hazards
+* Over-current/voltage - ideally will be directly countered by our interface box 
