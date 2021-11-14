@@ -18,7 +18,7 @@
 
 **Outcome:** There will be an external 12V power supply available to help us power our smart interface box. There will be four solar panel external inputs coming into the box and two external outputs leading out into a distribution box. The premises for our design will have to measure the voltage, current, temperature, and possibly additional information. Protection measures will have to be instilled. The project has to be scalable meaning that more than one panel's information will be collected on the back-end server of our website.
 
-* Solar Panel Model: Sunpower SPR-425E-WHT-D (425W) Solar Panel
+* Sunpower SPR-425E-WHT-D (425W) Solar Panel
 ![interfacebox](https://user-images.githubusercontent.com/90663938/141670113-c9ce25f9-13ad-44bb-9534-23f89b3467ad.png)
 
 
