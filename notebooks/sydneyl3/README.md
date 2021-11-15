@@ -10,7 +10,8 @@
 [09/14/2021 - 09/15/2021: Microcontroller Research and Design Proposal](#09142021---09152021-microcontroller-research-and-design-proposal) \
 [09/17/2021: ESP32 Microcontroller](#09172021-esp32-microcontroller) \
 [09/22/2021 - 09/26/2021: First Design Document Draft](#09222021---09262021-first-design-document-draft) \
-[09/27/2021: Design Document Check and Rooftop Visit](#09272021-design-document-check-and-rooftop-visit)
+[09/27/2021: Design Document Check and Rooftop Visit](#09272021-design-document-check-and-rooftop-visit) \
+[09/30/2021: Final Version of Design Document](#09302021-final-version-of-design-document)
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
@@ -113,7 +114,7 @@ I also updated our block diagram to specify our subsystems a bit more and to ide
 
 
 ## 09/22/2021 - 09/26/2021: First Design Document Draft
-**Objectives:** Complete our first draft of the design document and add any missing information so that the ECE445 course staff can evaluate and provide us with feedback in order to improve our design.
+**Objectives:** Complete our first draft of the Design Document and add any missing information so that the ECE445 course staff can evaluate and provide us with feedback in order to improve our design.
 
 **Outcome:** I was able to do more research about the design structure for the individual subsystems and provided the requirements and verifications for all the hardware aspect of the project. I created a first draft of the PCB schematic so that we have some notion of the parts we may need. The cost analysis was also done when I was considering the base parts that we would need for the structure of the project. Other passive compoenents are missing at the moment and will be added upon and updated as we work through more of the PCB schematic. To demonstrate that we can have 2 interface boxes that can communicate with one another and that the project can be scaled up to multiple panels, our costs would have essentially doubled meaning that we would need to buy 2 of everything. A schedule was also worked out so that I would know what to expect to work on and what deadlines we would try to meet over the next few weeks.
 
@@ -142,7 +143,7 @@ The uploaded first draft of the Design Document for our project can be found on 
 
 
 ## 09/27/2021: Design Document Check and Rooftop Visit
-**Objectives:** Meet with Professor Schuh and other TAs to discuss our design document progress and further improvements that we can make prior to the design review. Also observe the solar panels on the ECEB rooftop and observe the inputs that will be going into our box and a 12V supply that we will be using. Understand how the boxes will be mounted and which external load the smart interface box will supply. 
+**Objectives:** Meet with Professor Schuh and other TAs to discuss our Design Document progress and further improvements that we can make prior to the design review. Also observe the solar panels on the ECEB rooftop and observe the inputs that will be going into our box and a 12V supply that we will be using. Understand how the boxes will be mounted and which external load the smart interface box will supply. 
 
 **Outcome:** During our design document check with Professor Jonathon Schuh, TA's David Null and Bonhyun Ku, we were able to receive very good feedback on our design document.
 The following changes that need to be made include: 
@@ -170,3 +171,42 @@ As for adding more details to our PCB design, we are looking for specific parts 
 
 With additional research on the full capabilities of the Allegro ACS723 current sensor. It uses a Hall effect sensor to output a voltage relative to the current flowing through the IP+ and IP- pins on the board. The advantage of using a Hall effect sensor, specifically, is that the circuit being sensed and the circuit reading the sensor are electrically isolated meaning that, although your Arduino is running on 5V, the sensed circuit can be operating at higher DC or AC voltages. The Current Sensor Breakout measures both DC and AC currents all the way up to 5A, has full electrical isolation of measured and sensed circuits, and has a base sensitivity of 400mV/A. Although the analog output is adjustable to 80kHz, the bandwidth on the ACS723 Sensor Breakout width filter has been set to 20kHz to reduce noise when using at high gains. The full 80KHz bandwidth that the sensor is capable of can be recovered by closing the JP1 (Bandwidth Select) jumper on the back of the board.
 * Note: Although the chip itself is rated for up to 2.4kV (RMS) of isolation, the board has not been designed for such high voltage applications.
+
+## 09/30/2021: Final Version of Design Document
+**Objectives:** Update the Design Document utilizing the feedback that we got during our Design Document check and preparing for the final design review. We want to make sure there are no outstanding issues with our design before we handle the completion of the PCB. 
+
+**Outcome:** Further completion of our verifications. Look at which parts are in stock and adjust our PCB schematics on parts that we have available. We removed the ACS723 current sensor and replaced it with a similar ACS714 current sensor. Gate drivers were unavailable so we had to adjust our relay configuration.
+* POWER SUBSYSTEM:
+    * 12V Power Supply:
+        * DC Output 12V - May vary ~12V range
+        * Step Down Buck Converter (12V to 5V): Constant DC output ~5V range
+        * Step Down Buck Converter (12V to 3.3V): Constant DC output ~3.3V range
+* [SWITCHING SUBSYSTEM](https://www.mouser.com/datasheet/2/164/ftr_j2-967.pdf):
+    * Relay: Open Circuit Test (4 Different Combinations) - Input - Solar Panel (DC Input into Relay - DC Output out of Relay)
+        * DC (128 Cells) - AD Configuration: Open Ckt Voltage = 85.6V ± 2V DC Output w/ Variability
+        * DC (64 Cells) - BC Configuration: Open Ckt Voltage = 42.8V ± 2V DC Output w/ Variability
+        * DC (32 Cells) - CD Configuration: Open Ckt Voltage = 21.4V ± 2V DC Output w/ Variability
+        * DC (0 Cells) - XX Configuration: Open Ckt Voltage = 0V 
+Note: Variability means that dependent on certain conditions, this voltage will change (weather, sun exposure, etc)
+* [MONITORING SUBSYTEM](https://www.digikey.com/en/product-highlight/a/allegro-microsystems/acs714-automotive-grade-hall-effect-current-sensor): 
+    * Solar Panel Input: Dependent on which configuration - Output of Relay -> Voltage Divider - Current Divider goes before the Voltage Divider
+        * Voltage Divider: Measures Voltage of the Open Ckt Voltage from the Relay (Expect DC Output w/ Variability)
+        * Current Divider: Measures Current of the Cell Configuration - ~mA range (Small DC Current Value w/ Variability)
+* MANUAL CONFIGURATION: 
+    * Switches: 
+        * Testing: Do the switches operate how we expect? 
+        * Does it change which configuration we have? When the configuration is controlled through software, which one takes precedence?
+* [MICROCONTROLLER SUBSYSTEM](https://esp32.com/viewtopic.php?t=13089):
+    * ESP32 Microcontroller:     
+        * Does this have Wi-Fi Capability enabled?
+        * Does it connect to the wireless server that we are creating?
+        * Shut down when threshold values are reached 
+    * OLED Display:
+        * Does the OLED display output real time voltage, current, and temperature values that we are reading through an oscilloscope, through out voltage and current divider?
+* [THERMOCOUPLES](https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf):
+    * Temperature of different areas on the solar panel
+
+* Updated the Block Diagram in our Design Document:
+![thirdblockdiagram](https://user-images.githubusercontent.com/90663938/141706544-18eb3b55-0072-4cf8-8129-5cb7e61615da.png)
+
+The final reviewed draft of our Design Document can be found within this repository [here](https://github.com/NikhilMSeb/ECE445-FA21-Solar/blob/main/team%20documents/ECE%20445%20Design%20Document.pdf)
