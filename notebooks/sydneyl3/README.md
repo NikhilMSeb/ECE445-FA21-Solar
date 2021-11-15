@@ -217,12 +217,12 @@ The final reviewed draft of our Design Document can be found within this reposit
 ## 10/07/2021: PCB Schematic Updates
 **Objectives:** We updated the PCB schematic with parts that were available. A lot of diodes, current sensors, ADC converters, and gate drivers were out of stock quickly and we had to constantly change our schematic around. There were also issues with our PCB in which we had only one ground connection and if this was the case, we would achieve no isolation between the high voltage side of the solar panels and the microcontroller. 
 
-**Outcome:** The following are updated PCB Schematics
+**Outcome:** The following are updated PCB Schematics \
      * Power Subsystem: 
-![powersubsystem](https://user-images.githubusercontent.com/90663938/141707560-a3dc6858-057e-439b-9110-6bd16f60ca05.png)
+![powersubsystem](https://user-images.githubusercontent.com/90663938/141707560-a3dc6858-057e-439b-9110-6bd16f60ca05.png) \
      * Relay Subsystem
-![relaysubsystem](https://user-images.githubusercontent.com/90663938/141707573-b8a50f39-5823-41b1-b5d6-34e62dae14ac.png)
+![relaysubsystem](https://user-images.githubusercontent.com/90663938/141707573-b8a50f39-5823-41b1-b5d6-34e62dae14ac.png) \
      * Microcontroller Subsystem:
-![esp32microcontroller](https://user-images.githubusercontent.com/90663938/141707585-0e98210b-164b-4760-9e48-78fb59621af3.png)
+![esp32microcontroller](https://user-images.githubusercontent.com/90663938/141707585-0e98210b-164b-4760-9e48-78fb59621af3.png) \
      * Monitoring Subsystem:
 ![monitoringsubsystem](https://user-images.githubusercontent.com/90663938/141707618-741671fa-3e15-4a0f-a47a-f1be6d758006.png)
