@@ -11,7 +11,9 @@
 [09/17/2021: ESP32 Microcontroller](#09172021-esp32-microcontroller) \
 [09/22/2021 - 09/26/2021: First Design Document Draft](#09222021---09262021-first-design-document-draft) \
 [09/27/2021: Design Document Check and Rooftop Visit](#09272021-design-document-check-and-rooftop-visit) \
-[09/30/2021: Final Version of Design Document](#09302021-final-version-of-design-document)
+[09/30/2021: Final Version of Design Document](#09302021-final-version-of-design-document) \
+[10/07/2021: PCB Schematic Updates](#10072021-pcb-schematic-updates)
+
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
@@ -175,7 +177,7 @@ With additional research on the full capabilities of the Allegro ACS723 current 
 ## 09/30/2021: Final Version of Design Document
 **Objectives:** Update the Design Document utilizing the feedback that we got during our Design Document check and preparing for the final design review. We want to make sure there are no outstanding issues with our design before we handle the completion of the PCB. 
 
-**Outcome:** Further completion of our verifications. Look at which parts are in stock and adjust our PCB schematics on parts that we have available. We removed the ACS723 current sensor and replaced it with a similar ACS714 current sensor. Gate drivers were unavailable so we had to adjust our relay configuration.
+**Outcome:** Further completion of our verifications. Look at which parts are in stock and adjust our PCB schematics on parts that we have available. We removed the ACS723 current sensor and replaced it with a similar [ACS714 current sensor](https://www.digikey.com/en/product-highlight/a/allegro-microsystems/acs714-automotive-grade-hall-effect-current-sensor). Gate drivers were unavailable so we had to adjust our relay configuration.
 * [POWER SUBSYSTEM](https://www.ti.com/lit/ds/symlink/lm1117.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1634572215589):
     * 12V Power Supply:
         * DC Output 12V - May vary ~12V range
@@ -210,3 +212,17 @@ Note: Variability means that dependent on certain conditions, this voltage will 
 ![thirdblockdiagram](https://user-images.githubusercontent.com/90663938/141706544-18eb3b55-0072-4cf8-8129-5cb7e61615da.png)
 
 The final reviewed draft of our Design Document can be found within this repository [here](https://github.com/NikhilMSeb/ECE445-FA21-Solar/blob/main/team%20documents/ECE%20445%20Design%20Document.pdf)
+
+
+## 10/07/2021: PCB Schematic Updates
+**Objectives:** We updated the PCB schematic with parts that were available. A lot of diodes, current sensors, ADC converters, and gate drivers were out of stock quickly and we had to constantly change our schematic around. There were also issues with our PCB in which we had only one ground connection and if this was the case, we would achieve no isolation between the high voltage side of the solar panels and the microcontroller. 
+
+**Outcome:** The following are updated PCB Schematics
+     * Power Subsystem: 
+![powersubsystem](https://user-images.githubusercontent.com/90663938/141707560-a3dc6858-057e-439b-9110-6bd16f60ca05.png)
+     * Relay Subsystem
+![relaysubsystem](https://user-images.githubusercontent.com/90663938/141707573-b8a50f39-5823-41b1-b5d6-34e62dae14ac.png)
+     * Microcontroller Subsystem
+![esp32microcontroller](https://user-images.githubusercontent.com/90663938/141707585-0e98210b-164b-4760-9e48-78fb59621af3.png)
+     * Monitoring Subsystem
+![monitoringsubsystem](https://user-images.githubusercontent.com/90663938/141707618-741671fa-3e15-4a0f-a47a-f1be6d758006.png)
