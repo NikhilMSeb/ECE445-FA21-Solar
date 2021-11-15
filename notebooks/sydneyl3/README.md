@@ -176,7 +176,7 @@ With additional research on the full capabilities of the Allegro ACS723 current 
 **Objectives:** Update the Design Document utilizing the feedback that we got during our Design Document check and preparing for the final design review. We want to make sure there are no outstanding issues with our design before we handle the completion of the PCB. 
 
 **Outcome:** Further completion of our verifications. Look at which parts are in stock and adjust our PCB schematics on parts that we have available. We removed the ACS723 current sensor and replaced it with a similar ACS714 current sensor. Gate drivers were unavailable so we had to adjust our relay configuration.
-* POWER SUBSYSTEM:
+* [POWER SUBSYSTEM](https://www.ti.com/lit/ds/symlink/lm1117.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1634572215589):
     * 12V Power Supply:
         * DC Output 12V - May vary ~12V range
         * Step Down Buck Converter (12V to 5V): Constant DC output ~5V range
@@ -192,7 +192,7 @@ Note: Variability means that dependent on certain conditions, this voltage will 
     * Solar Panel Input: Dependent on which configuration - Output of Relay -> Voltage Divider - Current Divider goes before the Voltage Divider
         * Voltage Divider: Measures Voltage of the Open Ckt Voltage from the Relay (Expect DC Output w/ Variability)
         * Current Divider: Measures Current of the Cell Configuration - ~mA range (Small DC Current Value w/ Variability)
-* MANUAL CONFIGURATION: 
+* [MANUAL CONFIGURATION](https://sten-eswitch-13110800-production.s3.amazonaws.com/system/asset/product_line/data_sheet/129/100.pdf): 
     * Switches: 
         * Testing: Do the switches operate how we expect? 
         * Does it change which configuration we have? When the configuration is controlled through software, which one takes precedence?
