@@ -8,7 +8,8 @@ Our voltage reading pin is through SCL and SDA from the ADC isolator. There is a
 The following link has the libraries available for microchip ADC342: https://www.arduino.cc/reference/en/libraries/mcp342x/
 Examples for different functionalities included: https://github.com/stevemarple/MCP342x
 
-`#include <Wire.h>
+```
+#include <Wire.h>
 #include <MCP342x.h>
 
 /* Demonstrate the use of read() and convert(). If read() is called
@@ -107,13 +108,15 @@ void loop(void)
     lastLedFlash = millis();
   }
     
-}`
+}
+```
 
 As for monitoring temperature with the ESP32 and the DS18B20 thermocouples, it only requires one data line to communicate with our ESP32. There is a [direct tutorial](https://randomnerdtutorials.com/esp32-ds18b20-temperature-arduino-ide/) for that.
 
 Again, the library for the DS18B20 temperature sensor would have to be installed. 
 
-`#include <OneWire.h>
+```
+#include <OneWire.h>
 #include <DallasTemperature.h>
 
 // GPIO where the DS18B20 is connected to
@@ -141,10 +144,12 @@ void loop() {
   Serial.print(temperatureF);
   Serial.println("ºF");
   delay(5000);
-}`
+}
+```
 
 Since we have multiple thermocouples, we want to measure more than one digital temperature measurement:
-`#include <OneWire.h>
+```
+#include <OneWire.h>
 #include <DallasTemperature.h>
 
 // Data wire is plugged TO GPIO 4
@@ -222,13 +227,15 @@ void printAddress(DeviceAddress deviceAddress) {
     if (deviceAddress[i] < 16) Serial.print("0");
       Serial.print(deviceAddress[i], HEX);
   }
-}`
+}
+```
 
 Our final method of communication involves the ESP32 microcontroller communicating with the OLED display. [Tutorial](https://randomnerdtutorials.com/esp32-ssd1306-oled-display-arduino-ide/). The following code is simply to test out our OLED display prior to giving it command for writing text. 
 
 We can utilize one of the Adafruit_SSD1306 libraries or the Adafruit_GFX library to install the SSD1306 oled driver. 
 
-`#include <SPI.h>
+```
+#include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -617,7 +624,8 @@ void testanimate(const uint8_t *bitmap, uint8_t w, uint8_t h) {
       }
     }
   }
-}`
+}
+```
 
 Since our OLED has no reset, we can define a OLED_Reset command with:
 
@@ -625,7 +633,8 @@ Since our OLED has no reset, we can define a OLED_Reset command with:
 
 To write text to the OLED display, we would have to modify this code to include our voltage, current, and temperature measurements to display those. 
 
-`#include <Wire.h>
+```
+#include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -655,4 +664,5 @@ void setup() {
 
 void loop() {
   
-}`
+}
+```
