@@ -260,4 +260,19 @@ I now need to work on completing configuring the HTTP network functionalities on
 ## 11/nn/2021: Completing ESP-32 Stand-alone Wireless Programming 
 **Objectives:** Finish writing the code for the 2-way POST capabilities of the microcontroller 
 
+**Outcome:** base testing as well as 2-way, 
+
+## 11/nn/2021: Working on Django Framework Back-end
+**Objectives:** 
+
+**Outcome:** Setting up DB side, writing POST (entire pathway structure implementation), testing 
+
+## 11/nn/2021: Cleaning up 
+**Objectives:** 
+
 **Outcome:** 
+
+## 11/nn/2021: Django-ESP32 Wireless Communication Integration 
+**Objectives:** Integration testing as in Design plan ++
+
+**Outcome:** Issues converting POST on ESP32, 
