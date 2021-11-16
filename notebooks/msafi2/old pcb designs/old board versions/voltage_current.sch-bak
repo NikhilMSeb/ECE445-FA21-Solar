@@ -1,0 +1,291 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text GLabel 2350 3200 0    50   Input ~ 0
+ADC_input
+$Comp
+L Device:R R1
+U 1 1 6149E91B
+P 2700 2900
+F 0 "R1" H 2770 2946 50  0000 L CNN
+F 1 "R" H 2770 2855 50  0000 L CNN
+F 2 "" V 2630 2900 50  0001 C CNN
+F 3 "~" H 2700 2900 50  0001 C CNN
+	1    2700 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 6149F7DE
+P 2700 3500
+F 0 "R2" H 2770 3546 50  0000 L CNN
+F 1 "R" H 2770 3455 50  0000 L CNN
+F 2 "" V 2630 3500 50  0001 C CNN
+F 3 "~" H 2700 3500 50  0001 C CNN
+	1    2700 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6149F89E
+P 3500 2500
+F 0 "#PWR?" H 3500 2250 50  0001 C CNN
+F 1 "GND" V 3505 2372 50  0000 R CNN
+F 2 "" H 3500 2500 50  0001 C CNN
+F 3 "" H 3500 2500 50  0001 C CNN
+	1    3500 2500
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2350 3200 2700 3200
+Wire Wire Line
+	2700 3200 2700 3050
+Wire Wire Line
+	2700 2750 2700 2500
+Wire Wire Line
+	2700 2500 3500 2500
+Wire Wire Line
+	2700 3350 2700 3200
+Connection ~ 2700 3200
+$Comp
+L Sensor_Current:ACS712xLCTR-20A U1
+U 1 1 614A0672
+P 4800 3100
+F 0 "U1" H 5200 3550 50  0000 C CNN
+F 1 "ACS712xLCTR-20A" H 5200 3450 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4900 2750 50  0001 L CIN
+F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 4800 3100 50  0001 C CNN
+	1    4800 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 614A2477
+P 4800 3700
+F 0 "#PWR?" H 4800 3450 50  0001 C CNN
+F 1 "GND" H 4805 3527 50  0000 C CNN
+F 2 "" H 4800 3700 50  0001 C CNN
+F 3 "" H 4800 3700 50  0001 C CNN
+	1    4800 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 614A2B62
+P 5450 3350
+F 0 "C1" H 5565 3396 50  0000 L CNN
+F 1 "C" H 5565 3305 50  0000 L CNN
+F 2 "" H 5488 3200 50  0001 C CNN
+F 3 "~" H 5450 3350 50  0001 C CNN
+	1    5450 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 614A355F
+P 5450 3600
+F 0 "#PWR?" H 5450 3350 50  0001 C CNN
+F 1 "GND" H 5455 3427 50  0000 C CNN
+F 2 "" H 5450 3600 50  0001 C CNN
+F 3 "" H 5450 3600 50  0001 C CNN
+	1    5450 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 3650 4250 3650
+Wire Wire Line
+	4250 3650 4250 3300
+Wire Wire Line
+	4250 3300 4400 3300
+Wire Wire Line
+	4800 3500 4800 3700
+Wire Wire Line
+	5200 3200 5450 3200
+Wire Wire Line
+	5450 3500 5450 3600
+$Comp
+L power:+5V #PWR?
+U 1 1 614A45FE
+P 4800 2400
+F 0 "#PWR?" H 4800 2250 50  0001 C CNN
+F 1 "+5V" H 4815 2573 50  0000 C CNN
+F 2 "" H 4800 2400 50  0001 C CNN
+F 3 "" H 4800 2400 50  0001 C CNN
+	1    4800 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4800 2400 4800 2700
+$Comp
+L Device:R R3
+U 1 1 614A7BCC
+P 6000 3000
+F 0 "R3" H 6070 3046 50  0000 L CNN
+F 1 "R" H 6070 2955 50  0000 L CNN
+F 2 "" V 5930 3000 50  0001 C CNN
+F 3 "~" H 6000 3000 50  0001 C CNN
+	1    6000 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 614A8412
+P 6000 3500
+F 0 "R4" H 6070 3546 50  0000 L CNN
+F 1 "R" H 6070 3455 50  0000 L CNN
+F 2 "" V 5930 3500 50  0001 C CNN
+F 3 "~" H 6000 3500 50  0001 C CNN
+	1    6000 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 3100 5850 3100
+Wire Wire Line
+	5850 3100 5850 2850
+Wire Wire Line
+	5850 2850 6000 2850
+Wire Wire Line
+	6000 3150 6000 3250
+$Comp
+L power:GND #PWR?
+U 1 1 614A9716
+P 6000 3700
+F 0 "#PWR?" H 6000 3450 50  0001 C CNN
+F 1 "GND" H 6005 3527 50  0000 C CNN
+F 2 "" H 6000 3700 50  0001 C CNN
+F 3 "" H 6000 3700 50  0001 C CNN
+	1    6000 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6000 3700 6000 3650
+Text GLabel 6700 3250 2    50   Input ~ 0
+TO_ESP32
+Wire Wire Line
+	6000 3250 6700 3250
+Connection ~ 6000 3250
+Wire Wire Line
+	6000 3250 6000 3350
+$Comp
+L RF_Module:ESP32-WROOM-32 U?
+U 1 1 614B03EB
+P 9300 3950
+F 0 "U?" H 9300 5531 50  0000 C CNN
+F 1 "ESP32-WROOM-32" H 9300 5440 50  0000 C CNN
+F 2 "RF_Module:ESP32-WROOM-32" H 9300 2450 50  0001 C CNN
+F 3 "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf" H 9000 4000 50  0001 C CNN
+	1    9300 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Linear:LM7805_TO220 U3
+U 1 1 614B2010
+P 7250 1350
+F 0 "U3" H 7250 1592 50  0000 C CNN
+F 1 "LM7805_TO220" H 7250 1501 50  0000 C CNN
+F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 7250 1575 50  0001 C CIN
+F 3 "https://www.onsemi.cn/PowerSolutions/document/MC7800-D.PDF" H 7250 1300 50  0001 C CNN
+	1    7250 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP1 C3
+U 1 1 614B3844
+P 6750 1550
+F 0 "C3" H 6865 1596 50  0000 L CNN
+F 1 "CP1" H 6865 1505 50  0000 L CNN
+F 2 "" H 6750 1550 50  0001 C CNN
+F 3 "~" H 6750 1550 50  0001 C CNN
+	1    6750 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP1 C4
+U 1 1 614B4211
+P 7750 1550
+F 0 "C4" H 7865 1596 50  0000 L CNN
+F 1 "CP1" H 7865 1505 50  0000 L CNN
+F 2 "" H 7750 1550 50  0001 C CNN
+F 3 "~" H 7750 1550 50  0001 C CNN
+	1    7750 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 614B4DD3
+P 7950 1300
+F 0 "#PWR?" H 7950 1150 50  0001 C CNN
+F 1 "+5V" H 7965 1473 50  0000 C CNN
+F 2 "" H 7950 1300 50  0001 C CNN
+F 3 "" H 7950 1300 50  0001 C CNN
+	1    7950 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 614B57F6
+P 7250 1800
+F 0 "#PWR?" H 7250 1550 50  0001 C CNN
+F 1 "GND" H 7255 1627 50  0000 C CNN
+F 2 "" H 7250 1800 50  0001 C CNN
+F 3 "" H 7250 1800 50  0001 C CNN
+	1    7250 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6450 1350 6750 1350
+Wire Wire Line
+	6750 1400 6750 1350
+Connection ~ 6750 1350
+Wire Wire Line
+	6750 1350 6950 1350
+Wire Wire Line
+	7550 1350 7750 1350
+Wire Wire Line
+	7950 1350 7950 1300
+Wire Wire Line
+	7750 1400 7750 1350
+Connection ~ 7750 1350
+Wire Wire Line
+	7750 1350 7950 1350
+Wire Wire Line
+	7250 1800 7250 1650
+$Comp
+L power:GND #PWR?
+U 1 1 614B8CC8
+P 6750 1800
+F 0 "#PWR?" H 6750 1550 50  0001 C CNN
+F 1 "GND" H 6755 1627 50  0000 C CNN
+F 2 "" H 6750 1800 50  0001 C CNN
+F 3 "" H 6750 1800 50  0001 C CNN
+	1    6750 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 614B90B8
+P 7750 1800
+F 0 "#PWR?" H 7750 1550 50  0001 C CNN
+F 1 "GND" H 7755 1627 50  0000 C CNN
+F 2 "" H 7750 1800 50  0001 C CNN
+F 3 "" H 7750 1800 50  0001 C CNN
+	1    7750 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6750 1800 6750 1700
+Wire Wire Line
+	7750 1800 7750 1700
+$EndSCHEMATC
