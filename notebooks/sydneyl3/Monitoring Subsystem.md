@@ -1,6 +1,7 @@
-While awaiting PCB orders, it is a good idea to do research on finding some code as to how the ESP32 can read voltage/current readings while also communicating with the ADC isolator and the OLED (I2C)
+## 11/14/2021: I2C Communication with ESP32
+**Objectives:** While awaiting PCB orders, it is a good idea to do research on finding some code as to how the ESP32 can read voltage/current readings while also communicating with the ADC isolator and the OLED (I2C)
 
-Our voltage reading pin is through SCL and SDA from the ADC isolator. There is a [tutorial online](https://microcontrollerslab.com/ads1115-external-adc-with-esp32/) that communicated with an ADS1115 external ADC and it is a 16-bit ADC that can measure voltage at a higher resolution. 
+**Outcome:**: Our voltage reading pin is through SCL and SDA from the ADC isolator. There is a [tutorial online](https://microcontrollerslab.com/ads1115-external-adc-with-esp32/) that communicated with an ADS1115 external ADC and it is a 16-bit ADC that can measure voltage at a higher resolution. 
 
 1. Arduino IDE will program the ESP32 and we would have to look up and install the library of our ADC [MCP3428-E/SL](https://ww1.microchip.com/downloads/en/DeviceDoc/22226a.pdf) 
 ). It is also 16-bit.
