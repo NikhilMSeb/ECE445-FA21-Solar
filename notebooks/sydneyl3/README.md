@@ -12,7 +12,8 @@
 [09/22/2021 - 09/26/2021: First Design Document Draft](#09222021---09262021-first-design-document-draft) \
 [09/27/2021: Design Document Check and Rooftop Visit](#09272021-design-document-check-and-rooftop-visit) \
 [09/30/2021: Final Version of Design Document](#09302021-final-version-of-design-document) \
-[10/07/2021: PCB Schematic Updates](#10072021-pcb-schematic-updates)
+[10/07/2021: PCB Schematic Updates](#10072021-pcb-schematic-updates) \
+[10/12/2021: Power Subsystem LTSpice Simulations](#10122021-power-subsystem-ltspice-simulations)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -226,3 +227,20 @@ The final reviewed draft of our Design Document can be found within this reposit
 ![esp32microcontroller](https://user-images.githubusercontent.com/90663938/141707585-0e98210b-164b-4760-9e48-78fb59621af3.png)
 * Monitoring Subsystem:
 ![monitoringsubsystem](https://user-images.githubusercontent.com/90663938/141707618-741671fa-3e15-4a0f-a47a-f1be6d758006.png)
+
+
+## 10/12/2021: Power Subsystem LTSpice Simulations
+**Objectives:** Perform simulations to ensure that we can produce a proper 3.3V and 5V supply line for our components with the [LM1117 linear regulator](https://www.ti.com/lit/ds/symlink/lm1117.pdf?ts=1637235393492&ref_url=https%253A%252F%252Fwww.google.com%252F). 
+
+**Outcome:** Utilizing the LM1117 adjustable linear regulator can produce a 3.3V and 5V output given a 12V supply. The input capacitor is to improve the transient response and stability whilst output voltage is dependent on which resistors we choose for R1 and R2. 
+
+* Output Relationship for LM1117:
+![lm1117](https://user-images.githubusercontent.com/90663938/142512370-fce841a8-7ecd-47cf-a6d6-50ca2f7de3eb.png)
+
+* LTSpice Simulation for the 3.3V power supply line
+![image (1)](https://user-images.githubusercontent.com/90663938/142512474-2471c729-447c-4432-bc32-363667dbc1e9.png)
+
+* LTSpice Simulation for the 5V power supply line
+![image](https://user-images.githubusercontent.com/90663938/142512487-13a9a9b9-7109-4c4d-934c-d554161dc2a7.png)
+
+Both results are as expected and we ideally produce two separate 3.3V and 5V supply lines given our 12V input utilizing the LM1117 linear regulator.
