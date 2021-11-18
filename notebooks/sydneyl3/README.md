@@ -232,9 +232,8 @@ The final reviewed draft of our Design Document can be found within this reposit
 ## 10/12/2021: Power Subsystem LTSpice Simulations
 **Objectives:** Perform simulations to ensure that we can produce a proper 3.3V and 5V supply line for our components with the [LM1117 linear regulator](https://www.ti.com/lit/ds/symlink/lm1117.pdf?ts=1637235393492&ref_url=https%253A%252F%252Fwww.google.com%252F). 
 
-**Outcome:** Utilizing the LM1117 adjustable linear regulator can produce a 3.3V and 5V output given a 12V supply. The input capacitor is to improve the transient response and stability whilst output voltage is dependent on which resistors we choose for R1 and R2. 
+**Outcome:** Utilizing the LM1117 adjustable linear regulator can produce a 3.3V and 5V output given a 12V supply. The input capacitor is to improve the transient response and stability whilst output voltage is dependent on which resistors we choose for R1 and R2. The output relationship is:
 
-* Output Relationship for LM1117: 
 ![lm1117](https://user-images.githubusercontent.com/90663938/142512370-fce841a8-7ecd-47cf-a6d6-50ca2f7de3eb.png)
 
 * LTSpice Simulation for the 3.3V power supply line
