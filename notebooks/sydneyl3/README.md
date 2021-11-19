@@ -17,7 +17,7 @@
 [10/19/2021: Additional PCB Updates](#10192021-additional-pcb-updates) \
 [10/21/2021: Implementing the Darlington Array](#10212021-implementing-the-darlington-array) \
 [10/27/2021: Design Document Updates](#10272021-design-document-updates) \
-[10/29/2021: Finalized Relay Subsystem](#10292921-finalized-relay-subsystem)
+[10/29/2021: Finalized Relay Subsystem](#10292021-finalized-relay-subsystem)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
