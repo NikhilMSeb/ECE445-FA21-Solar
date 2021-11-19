@@ -317,7 +317,7 @@ synchronized to the sampling of bits by a clock signal shared between the master
 ![finalblockdiagram](https://user-images.githubusercontent.com/90663938/142573964-645d20f7-1245-4b83-bc9a-50212bb2f99c.png)
 
 
-## 10/29/2021: Finalized Relay Subsytem
+## 10/29/2021: Finalized Relay Subsystem
 **Objective:** Fix the implementation of the darlington array in our circuit.
 
 **Outcome:** After some feedback provided to Maram and I from Evan, he had mentioned we have incorrectly wired the Darlington Array in our circuit. To mend this issue, I read the datasheet on how to wire the Darlington Array when utilizing it to control a set of relays. In addition, when I had placed the part order, I noticed that the ULN2003a Darlington was out of stock so I chose an alternative [ULN2003BDR](https://www.ti.com/lit/ds/symlink/uln2003b.pdf?ts=1637302544439&ref_url=https%253A%252F%252Fwww.google.com%252F).
