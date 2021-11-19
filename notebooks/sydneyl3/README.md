@@ -267,20 +267,14 @@ The [ESP32 microcontroller](https://components101.com/sites/default/files/compon
 * GPIO21(SDA), GPIO22(SCL): Used for IIC communication using Wire library.
 * Reset Pin: The reset pin for ESP32 is the Enable (EN) pin. Making this pin LOW, resets the microcontroller.
 
-Connecting ESP32 with our Relay Configuration
-* Utilizing an Automotive Catalog [Dual 2-Line To 4-Line Decoders/Demultiplexers](https://www.ti.com/lit/ds/symlink/sn74hc139-q1.pdf?ts=1633760158181&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FSN74HC139-Q1)
+Connecting ESP32 with our Relay Configuration. Control signal from ESP32 & Manual Switch override will have to dictate configuration that inputs into current sensor
+   * If utilizing manual switch configuration - involved programming to determines which signal is read
 
 Power Flow: Solar Panels -> 6 pin screw on PCB ->  3 FTR-J2 Series Relays -> MCP1407 High Speed Power MOSFET Drivers -> SN74HC139-Q1 2-to-4 MUX ->  ESP32
 Solar Panel output connects to the current sensor prior to going through the voltage sensor (divider)
 * ACS723 Current Sensor
 
-Input of the [SN74HC129 2-to-4 Decoder](https://www.ti.com/lit/ds/symlink/sn54hc139-sp.pdf?ts=1637295602813&ref_url=https%253A%252F%252Fwww.google.com%252F) will be the current sensor. 
-* 2 inputs (4 possible configurations - AD (128-cells), BC (64-cells), CD (32-cells), XX (0-cells))
-   * [Relay](https://www.fcl.fujitsu.com/downloads/MICRO/fcai/relays/ftr-j2.pdf) Output & Interface Output
-* Control signal from ESP32 & Manual Switch override will have to dictate configuration that inputs into current sensor
-   * If utilizing manual switch configuration - involved programming to determines which signal is read
-
-Utilizing a Decoder: SN74HC129DSO16 2-to-4 Decoder
+Utilizing a Automotive Catalog [SN74HC129DSO16 Dual 2-Line to 4-Line Decoder/Demultiplexor](https://www.ti.com/lit/ds/symlink/sn74hc139-q1.pdf?ts=1633760158181&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FSN74HC139-Q1):
 * 2 Inputs: 1A 2A / 1B 2B / 1G 2G
    * 1A 2A - First bit of control signal from ESP32 I2C
    * 1B 2B - Second bit of control signal from ESP32 I2C
