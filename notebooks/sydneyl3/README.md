@@ -13,7 +13,8 @@
 [09/27/2021: Design Document Check and Rooftop Visit](#09272021-design-document-check-and-rooftop-visit) \
 [09/30/2021: Final Version of Design Document](#09302021-final-version-of-design-document) \
 [10/07/2021: PCB Schematic Updates](#10072021-pcb-schematic-updates) \
-[10/12/2021: Power Subsystem LTSpice Simulations](#10122021-power-subsystem-ltspice-simulations)
+[10/12/2021: Power Subsystem LTSpice Simulations](#10122021-power-subsystem-ltspice-simulations) \
+[10/19/2021: Additional PCB Updates](#10192021-additional-pcb-updates) 
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -236,10 +237,66 @@ The final reviewed draft of our Design Document can be found within this reposit
 
 ![lm1117](https://user-images.githubusercontent.com/90663938/142512370-fce841a8-7ecd-47cf-a6d6-50ca2f7de3eb.png)
 
-* LTSpice Simulation for the 3.3V power supply line
+* LTSpice Simulation for the 3.3V power supply line:
 ![image (1)](https://user-images.githubusercontent.com/90663938/142512474-2471c729-447c-4432-bc32-363667dbc1e9.png) 
 
-* LTSpice Simulation for the 5V power supply line
+* LTSpice Simulation for the 5V power supply line:
 ![image](https://user-images.githubusercontent.com/90663938/142512487-13a9a9b9-7109-4c4d-934c-d554161dc2a7.png) 
 
 Both results are as expected and we ideally produce two separate 3.3V and 5V supply lines given our 12V input utilizing the LM1117 linear regulator.
+
+
+## 10/19/2021: Additional PCB Updates
+**Objectives:** After our TA meeting today, Evan provided us valuable advice to fix some problems that we had previously in our PCB schematic. This includes additional research on why we are utilizing the decoder and current relay subsystem in the first place even though the working schematic is provided to us and also alternatives to simplifying our relay configuration. In addition, we need to make some changes to correctly implement isolation in our board. 
+
+**Outcome:** While meeting with Evan this week, he mentioned that to correctly provide isolation between the high voltage side and the microcontroller's side, we need to have separate grounds. Initially, we had the same ground connected to the relay configuration and also the microcontroller which would have negated the purpose of the ADC isolator and prevented us from having galvanic isolation in the first place. Therefore, we need to update the schematic ground connections. Another thing discussed during our meeting was to explain how the relay configuration would work. There are two output pins connecting to the external load named POS_Output and NEG_Output. As the configurations of the solar cells are CD (32-cells), BC (64-cells), and AD (128-cells), there will be 3 connections to POS_Output, cell A, B, and C, while the NEG_Output will have 2 connections, cells C and D. The control signals from the ESP32 will be coming from the GPIO pins and the gate drivers will amplify the voltage to 12V which is the switching voltage of the relays. 
+This is the current functionality of the relay subsystem but Evan proposed to have our control signals output directly from the ESP32 without utilizing a decoder. We will do research on both to figure out if this replacement can be done to simplify our circuit in order to have less parts on the board. This is important because if this turns out to be a project that we can scale up to 60 solar panels, then we need to consider reducing costs for a singular solar panel and to ensure less power loss due to the added number of components.
+
+The [ESP32 microcontroller](https://components101.com/sites/default/files/component_datasheet/ESP32%20Datasheet.pdf) has 39 digital pins - 34 can be used as GPIO and the remaining are input only pins. 2 inputs - 4 outputs - 1 control signal (ESP32)
+   * 18-channels for 12-bit ADC 
+   * 2-channel for 8-bit DAC
+   * 16 channels for PWM signal generation  
+   * 10 GPIO pins supports capacitive features
+* The ESP32 has multiplexing feature, this enables the programmer to configure any GPIO pin for PWM or other serial communication through program
+* The ESP32 supports 3 SPI Interface, 3 UART interface, 2 I2C interface, 2 I2S interface and also supports CAN protocol.
+
+3 UART interface: The ESP32 supports 3 UART interface for TTL communication. This would require 3 sets of Rx and Tx pins. All the 6 pins are software configurable and hence any GPIO pin can be programmed to be used for UART.
+* External Interrupt: Again since the ESP32 supports multiplexing any GPIO pin can be programmed to be used as an interrupt pin.
+* GPIO23 (MOSI), GPIO19(MISO), GPIO18(CLK) and GPIO5 (CS): These pins are used for SPI communication. ESP32 supports two SPI, this is the first set.
+* GPIO13 (MOSI), GPIO12(MISO), GPIO14(CLK) and GPIO15 (CS): These pins are used for SPI communication. ESP32 supports two SPI, this is the second set.
+* GPIO21(SDA), GPIO22(SCL): Used for IIC communication using Wire library.
+* Reset Pin: The reset pin for ESP32 is the Enable (EN) pin. Making this pin LOW, resets the microcontroller.
+
+Connecting ESP32 with our Relay Configuration
+* Utilizing an Automotive Catalog [Dual 2-Line To 4-Line Decoders/Demultiplexers](https://www.ti.com/lit/ds/symlink/sn74hc139-q1.pdf?ts=1633760158181&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FSN74HC139-Q1)
+
+Power Flow: Solar Panels -> 6 pin screw on PCB ->  3 FTR-J2 Series Relays -> MCP1407 High Speed Power MOSFET Drivers -> SN74HC139-Q1 2-to-4 MUX ->  ESP32
+Solar Panel output connects to the current sensor prior to going through the voltage sensor (divider)
+* ACS723 Current Sensor
+
+Input of the [SN74HC129 2-to-4 Decoder](https://www.ti.com/lit/ds/symlink/sn54hc139-sp.pdf?ts=1637295602813&ref_url=https%253A%252F%252Fwww.google.com%252F) will be the current sensor. 
+* 2 inputs (4 possible configurations - AD (128-cells), BC (64-cells), CD (32-cells), XX (0-cells))
+   * [Relay](https://www.fcl.fujitsu.com/downloads/MICRO/fcai/relays/ftr-j2.pdf) Output & Interface Output
+* Control signal from ESP32 & Manual Switch override will have to dictate configuration that inputs into current sensor
+   * If utilizing manual switch configuration - involved programming to determines which signal is read
+
+Utilizing a Decoder: SN74HC129DSO16 2-to-4 Decoder
+* 2 Inputs: 1A 2A / 1B 2B / 1G 2G
+   * 1A 2A - First bit of control signal from ESP32 I2C
+   * 1B 2B - Second bit of control signal from ESP32 I2C
+   * 1G 2G - GND 
+* Operation: 2 inputs, 4 outputs
+   * 00: Unused XX configuration (0 cells)
+   * 01: CD configuration (32 cells)
+   * 10: BC configuration (64 cells)
+   * 11: AD configuration (128 cells)
+      * 1Y0/2Y0: X X (Open Ckt)
+      * 1Y1/2Y1: C_POS D_NEG = CD (32 cells)
+      * 1Y2/2Y2: B_POS C_NEG = BC (64 cells)
+      * 1Y3/2Y3: A_POS D_NEG = AD (128 cells)
+I2C is a serial communication protocol, so data is transferred bit by bit along a single wire (the SDA line). Like SPI, I2C is synchronous, so the output of bits is 
+synchronized to the sampling of bits by a clock signal shared between the master and the slave. The clock signal is always controlled by the master.
+* Planning on utilize I2C pins to program the 2 inputs to the decoder
+   * Pinout depending on the specific [ESP32 Devboard Model](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/) we decide to use
+      * Based: Pins 16-33 work well for ADC/DAC input/output
+      * Program 2 pins for decoder input (Code I2C capability)
