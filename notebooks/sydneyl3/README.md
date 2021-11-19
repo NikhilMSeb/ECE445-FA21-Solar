@@ -14,7 +14,9 @@
 [09/30/2021: Final Version of Design Document](#09302021-final-version-of-design-document) \
 [10/07/2021: PCB Schematic Updates](#10072021-pcb-schematic-updates) \
 [10/12/2021: Power Subsystem LTSpice Simulations](#10122021-power-subsystem-ltspice-simulations) \
-[10/19/2021: Additional PCB Updates](#10192021-additional-pcb-updates) 
+[10/19/2021: Additional PCB Updates](#10192021-additional-pcb-updates) \
+[10/21/2021: Implementing the Darlington Array](#10212021-implementing-the-darlington-array) \
+[10/27/2021: Design Document Updates](#10272021-design-document-updates)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -294,3 +296,38 @@ synchronized to the sampling of bits by a clock signal shared between the master
    * Pinout depending on the specific [ESP32 Devboard Model](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/) we decide to use
       * Based: Pins 16-33 work well for ADC/DAC input/output
       * Program 2 pins for decoder input (Code I2C capability)
+
+
+## 10/21/2021: Implementing the Darlington Array
+**Objectives:** The goal is to reduce the amount of components in our relay subsystem to reduce overall costs that can add up to a lot if this project is scaled to 60 solar panels. Secondly, learn how to use the darlington array and implement that in place of the inverting IC, decoder, and the gate drivers.
+
+**Outcome:** After our TA meeting, Evan proposed a good idea to simplify our circuit especially when doing board layout was the Darlington Array ULN2003a. Instead of multiple additional components on the board, we'd have one IC that can drive the the relays utilizing control signals from the ESP32 microcontroller. The Darlington Array is a high-voltage, high-current switch array containing multiple open-collector Darlington transistors with common emitters, and integrated flyback diodes for inductive loads. This is good for our relays because since the coil in the relay cannot instantly change its current, a freewheeling diode is placed in parallel to the relay's inductance coil so that it prevents huge voltage spikes from arising when the power supply is suddenly disconnected. 
+
+* Implementing the Darlington Array 
+![image (3)](https://user-images.githubusercontent.com/90663938/142573164-f10b1fea-348f-4803-be60-a4a1d84779fc.png)
+
+
+## 10/27/2021: Design Document Updates
+**Objectives:** After receiving feedback from Editorial Services regarding our Design Document, there were quite a bit of formatting issues that we needed to fix prior to our Final Paper. Some parts of the paper seemed ambiguous and needed additional details so the goal was to work on improving and also doing additional revisions to finalize different components of our Design Document. 
+
+**Outcome:** Many changes were included into the design document. One key detail was that our subsystems were not correctly organized and in our block diagram, it was good to have multiple subsystems instead of just simply components. Therefore, I updated and made specific flow lines and details so that the power and data flow could be easily followed along with understanding which components were included. I also updated the requirements and verifications for the hardware aspect of the design document and our high-level requirements needed to be changed because prior, they were solely based on the assumption that the solar panel could even achieve it's max voltage of 85.6V and that we would be taking measurement with that voltage. This is not the case and so, our solar panel parameter measurements are based on how accurate it can be compared to the measurements taken in a lab environment. 
+
+* Final Block Diagram
+![finalblockdiagram](https://user-images.githubusercontent.com/90663938/142573964-645d20f7-1245-4b83-bc9a-50212bb2f99c.png)
+
+
+## 10/29/2021: Relay Subsystem Fix
+**Objective:** Fix the implementation of the darlington array in our circuit.
+
+**Outcome:** After some feedback provided to Maram and I from Evan, he had mentioned we have incorrectly wired the Darlington Array in our circuit. To mend this issue, I read the datasheet on how to wire the Darlington Array when utilizing it to control a set of relays. In addition, when I had placed the part order, I noticed that the ULN2003a Darlington was out of stock so I chose an alternative [ULN2003BDR](https://www.ti.com/lit/ds/symlink/uln2003b.pdf?ts=1637302544439&ref_url=https%253A%252F%252Fwww.google.com%252F).
+
+* [ULN2003 Driving a Set of Relays](https://www.bristolwatch.com/ele/uln2003a.htm)
+![uln2003a_6](https://user-images.githubusercontent.com/90663938/142574619-2a072948-a5a8-4bed-94a2-50714ef62320.png)
+
+I re-implementing the Darlington Array in a similar fashion and mapped out the control signals and relays to the appropriate pins. 
+![image (2)](https://user-images.githubusercontent.com/90663938/142574743-22736f29-3025-4c49-bdb2-514364e6e058.png)
+
+Therefore, our finalized Relay Subsystem is mapped out on the following schematic: 
+![image (5)](https://user-images.githubusercontent.com/90663938/142574832-8bcb5310-6ee5-42c5-9d2c-256a14d5f32d.png)
+
+
