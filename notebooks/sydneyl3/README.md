@@ -16,7 +16,8 @@
 [10/12/2021: Power Subsystem LTSpice Simulations](#10122021-power-subsystem-ltspice-simulations) \
 [10/19/2021: Additional PCB Updates](#10192021-additional-pcb-updates) \
 [10/21/2021: Implementing the Darlington Array](#10212021-implementing-the-darlington-array) \
-[10/27/2021: Design Document Updates](#10272021-design-document-updates)
+[10/27/2021: Design Document Updates](#10272021-design-document-updates) \
+[10/29/2021: Finalized Relay Subsystem](#10292921-finalized-relay-subsystem)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -316,7 +317,7 @@ synchronized to the sampling of bits by a clock signal shared between the master
 ![finalblockdiagram](https://user-images.githubusercontent.com/90663938/142573964-645d20f7-1245-4b83-bc9a-50212bb2f99c.png)
 
 
-## 10/29/2021: Relay Subsystem Fix
+## 10/29/2021: Finalized Relay Subsytem
 **Objective:** Fix the implementation of the darlington array in our circuit.
 
 **Outcome:** After some feedback provided to Maram and I from Evan, he had mentioned we have incorrectly wired the Darlington Array in our circuit. To mend this issue, I read the datasheet on how to wire the Darlington Array when utilizing it to control a set of relays. In addition, when I had placed the part order, I noticed that the ULN2003a Darlington was out of stock so I chose an alternative [ULN2003BDR](https://www.ti.com/lit/ds/symlink/uln2003b.pdf?ts=1637302544439&ref_url=https%253A%252F%252Fwww.google.com%252F).
@@ -329,5 +330,3 @@ I re-implemented the Darlington Array in a similar fashion and mapped out the co
 
 Therefore, our finalized Relay Subsystem is mapped out on the following schematic: 
 ![image (5)](https://user-images.githubusercontent.com/90663938/142574832-8bcb5310-6ee5-42c5-9d2c-256a14d5f32d.png)
-
-
