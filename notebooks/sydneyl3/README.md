@@ -324,7 +324,7 @@ synchronized to the sampling of bits by a clock signal shared between the master
 * [ULN2003 Driving a Set of Relays](https://www.bristolwatch.com/ele/uln2003a.htm)
 ![uln2003a_6](https://user-images.githubusercontent.com/90663938/142574619-2a072948-a5a8-4bed-94a2-50714ef62320.png)
 
-I re-implementing the Darlington Array in a similar fashion and mapped out the control signals and relays to the appropriate pins. 
+I re-implemented the Darlington Array in a similar fashion and mapped out the control signals and relays to the appropriate pins. 
 ![image (2)](https://user-images.githubusercontent.com/90663938/142574743-22736f29-3025-4c49-bdb2-514364e6e058.png)
 
 Therefore, our finalized Relay Subsystem is mapped out on the following schematic: 
