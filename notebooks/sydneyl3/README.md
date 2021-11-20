@@ -19,7 +19,8 @@
 [10/27/2021: Design Document Updates](#10272021-design-document-updates) \
 [10/29/2021: Finalized Relay Subsystem](#10292021-finalized-relay-subsystem) \
 [10/30/2021: PCB Completion](#10302021-pcb-completion) \
-[11/07/2021: Drafting the Design Aspect of the Final Paper](#11072021-drafting-the-design-aspect-of-the-final-paper)
+[11/07/2021: Drafting the Design Aspect of the Final Paper](#11072021-drafting-the-design-aspect-of-the-final-paper) \
+[11/12/2021: Researching the Hardware Communication Aspect of the ESP32](#11122021-researching-the-hardware-communication-aspect-of-the-esp32)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -348,12 +349,12 @@ Therefore, our finalized Relay Subsystem is mapped out on the following schemati
 * ACS723 needs GND1
 Once we finalized the PCB and got it approved, we moved onto the ordering phase of the project which we were kindly provided by Professor Banerjee and his team.
 
-## 10/07/2021: Drafting the Design Aspect of the Final Paper
+## 11/07/2021: Drafting the Design Aspect of the Final Paper
 **Objective:** After the completion of the PCB design, we can draft in the design process into our Final Paper
 
 **Outcome:** I have evolved and taken additional data from our refined Design Document to forge a first draft of our Final Paper. Especially correcting the language and format provided by ECE Editorial Services to assist us on having an organized paper with proper technical content.
 
-## 10/12/2021: Researching the Hardware Communication Aspect of the ESP32
+## 11/12/2021: Researching the Hardware Communication Aspect of the ESP32
 **Objectives:** While awaiting PCB orders, it is a good idea to do research on finding some code as to how the ESP32 can read voltage/current readings while also communicating with the ADC isolator and the OLED (I2C)
 
 **Outcome:** Our voltage reading pin is through SCL and SDA from the ADC isolator. There is a [tutorial online](https://microcontrollerslab.com/ads1115-external-adc-with-esp32/) that communicated with an ADS1115 external ADC and it is a 16-bit ADC that can measure voltage at a higher resolution. 
