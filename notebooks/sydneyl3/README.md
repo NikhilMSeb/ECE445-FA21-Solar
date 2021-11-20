@@ -239,6 +239,8 @@ The final reviewed draft of our Design Document can be found within this reposit
 **Outcome:** Utilizing the LM1117 adjustable linear regulator can produce a 3.3V and 5V output given a 12V supply. The input capacitor is to improve the transient response and stability whilst output voltage is dependent on which resistors we choose for R1 and R2. The output relationship is:
 
 ![lm1117](https://user-images.githubusercontent.com/90663938/142512370-fce841a8-7ecd-47cf-a6d6-50ca2f7de3eb.png)
+![33V](https://user-images.githubusercontent.com/90663938/142715112-967d44a1-acd3-41bf-8317-a9d4e63fe9f4.png)
+![5V](https://user-images.githubusercontent.com/90663938/142715050-11963bac-f594-4d1c-87fe-bd6a0b936cc3.png)
 
 * LTSpice Simulation for the 3.3V power supply line:
 ![image (1)](https://user-images.githubusercontent.com/90663938/142512474-2471c729-447c-4432-bc32-363667dbc1e9.png) 
