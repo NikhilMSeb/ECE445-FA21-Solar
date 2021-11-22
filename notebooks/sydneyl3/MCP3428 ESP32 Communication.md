@@ -1,9 +1,11 @@
+Programming the ADC
+
 Linked [github for MCP342 code from MCP342 library's website](https://github.com/stevemarple/MCP342x)
 
 
 [Read Loop from Github](https://github.com/uChip/MCP342X)
 
-'''
+```
 // Include libraries this sketch will use
 #include  <Wire.h>
 #include  <MCP342X.h>
@@ -40,7 +42,7 @@ void loop() {
   Serial.println(result, HEX);
   
 }  // End of loop()
-'''
+```
 
 
 ESP-IDF compatible library for using the MCP342X series of ADCs with i2c interface linked [here](https://github.com/craftmetrics/esp32-mcp342x)
