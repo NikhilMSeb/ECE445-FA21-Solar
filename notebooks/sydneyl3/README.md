@@ -20,7 +20,9 @@
 [10/29/2021: Finalized Relay Subsystem](#10292021-finalized-relay-subsystem) \
 [10/30/2021: PCB Completion](#10302021-pcb-completion) \
 [11/07/2021: Drafting the Design Aspect of the Final Paper](#11072021-drafting-the-design-aspect-of-the-final-paper) \
-[11/12/2021: Researching the Hardware Communication Aspect of the ESP32](#11122021-researching-the-hardware-communication-aspect-of-the-esp32)
+[11/12/2021: Researching the Hardware Communication Aspect of the ESP32](#11122021-researching-the-hardware-communication-aspect-of-the-esp32) \
+[11/19/2021: Part Testing Prior to PCB Arrival](#11192021-part-testing-prior-to-pcb-arrival) \
+[11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -1024,3 +1026,95 @@ void loop() {
   
 }
 ```
+
+
+## 11/12/2021: Researching the Hardware Communication Aspect of the ESP32
+**Objective:** Research more on how the ESP32 can communicate with the ADC isolator and also how the ESP32 can send high and low signals to the Darlington array to trigger close the switches of our relays.
+
+**Outcome:** We did additional research for the ADC isolator because there was not a specific tutorial that explained how an ESP32 microcontroller could communicate with the specific ADC that we chose to utilize in our project. However, we researched and looked at the libraries to gain better insight by looking at how the microcontroller communicated with different ADCs and sampled code from there for our project. 
+
+Programming the ADC:
+Linked [github for MCP342 code from MCP342 library's website](https://github.com/stevemarple/MCP342x)
+ESP-IDF compatible library for using the MCP342X series of ADCs with i2c interface linked [here](https://github.com/craftmetrics/esp32-mcp342x)
+
+[Read Loop from Github](https://github.com/uChip/MCP342X)
+
+```
+// Include libraries this sketch will use
+#include  <Wire.h>
+#include  <MCP342X.h>
+
+// Instantiate objects used in this project
+MCP342X myADC;
+
+void setup() {
+  Wire.begin();  // join I2C bus
+  TWBR = 12;  // 400 kHz (maximum)
+  
+  Serial.begin(9600); // Open serial connection to send info to the host
+  while (!Serial) {}  // wait for Serial comms to become ready
+  Serial.println("Starting up");
+  Serial.println("Testing device connection...");
+    Serial.println(myADC.testConnection() ? "MCP342X connection successful" : "MCP342X connection failed");
+    
+  myADC.configure( MCP342X_MODE_CONTINUOUS |
+                   MCP342X_CHANNEL_1 |
+                   MCP342X_SIZE_16BIT |
+                   MCP342X_GAIN_1X
+                 );
+
+  Serial.println(myADC.getConfigRegShdw(), HEX);
+  
+}  // End of setup()
+
+void loop() {
+  static int16_t  result;
+  
+  myADC.startConversion();
+  myADC.getResult(&result);
+  
+  Serial.println(result, HEX);
+  
+}  // End of loop()
+```
+
+Another communication aspect of the project we had to research was sending a high and low signal to the Darlington Array so it could switch close the relays. Since in our schematic, we noticed that the control signals we utilized did not exactly line up with the output of the corresponding Darlington pair, we had to do some mapping of the control signals and cross couple some nodes in order to get the configurations we wanted from the solar panels. 
+
+We utilized a ULN2003BDR and looking at the datasheet for the [ULN2003B Darlington Array](https://www.ti.com/lit/ds/symlink/uln2003b.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1637441321544&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D10%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fuln2003b), the input voltage can be around a range of 2.7V to 3V and with the current input resistor value of 2.7k ohms, I wanted to ensure that the Darlington Array could withstand a voltage coming from the ESP32 control signals of around a max of 3.3V. Whilst researching that, I came across different ways that others have utilized the ESP32 and coded it to work with the Darlington Array.
+
+
+A [tutorial](https://randomnerdtutorials.com/esp32-stepper-motor-28byj-48-uln2003/) I found uses the ESP32 to communicate with the ULN2003a as then to a motor driver. The Darlington has motor drive applications along with driving relays and the latter is what we are specifically utilizing our Darlington Array for. Therefore, we can modify this code to work with 6 Darlington Pairs and drive 6 of our relays.
+
+
+## 11/19/2021: Part Testing Prior to PCB Arrival
+**Objectives:** With awaiting the arrival of the PCB, we did not want to waste the little amount of time we had and with the hardware aspect being seemingly finished, we wanted to still work on as much testing as we could. Especially with core functionalities in the subsystems such as having the ESP32 microcontroller being able to communicate on the hardware aspect of the project and testing out the different subsystems and going from there. Since most of our parts were surface mounts, testing it on a breadboard would be tough and we were generously provided some SMD breakout boards by Evan to assist with the ADC and Darlington tests. 
+
+**Outcome:** As a result, we were able to get the ESP32 to communicate with the Darlington and to switch close the relays on the breadboard. We attached a DC voltage source to the relay switch and if the ESP32 was outputting the correct control signals to the darlington, we would see that voltage at the output of the relay when switched closed. This worked successfully and we were able to verify that the Darlington Array worked in conjunction with the relays and the ESP32 microcontroller.
+
+The second test that we wanted to work on before the PCB arrived is ADC communication with the isolator and the ESP32. This was difficult for us because we were having issues even detecting the isolator and once that was resolved, there were still many issues that we observed such as observing the incorrect signals on the SDA and SCL pins. We hope to resolve these issues in the upcoming week prior to receiving the PCB and complete the software side of the programming so most of the focus once we receive all the parts and the board can be sorted out efficiently.
+
+
+## 11/24/2021: PCB Retrieval and Additional Testing
+**Objectives:** Test the subsystems which mostly include surface mount components guided by the verifications table from our Design Document. We want to solder the parts that we can that don't involve ESP32 hardware communication unless it has been tested and proven to work as expected. The hardware communication that has been verified involves the OLED, thermocouples, darlington array, and the relays so those components could be soldered onto our PCB. Since the power subsystem included surface mount linear regulators, I held off on the testing until this point and was able to resolve some new issues discovered within our schematic. 
+
+**Outcome:** I started off with soldering the Power Subsystem, that included all the passive components, the linear regulator, and we applied a 12V source input so that we could test it. However, when I was reading the output voltage of the 3.3V and 5V linear regulators, they were not producing the expected voltage and had a voltage output of around 10.9V. This was too high and would not work especially since having a output voltage of 10.9V would fry most of our components. After further research, we realized that we had fixed linear regulators and the schematic of our PCB was created under the assumption that we would have adjustable output linear regulators. To mend this issue, we just simply had to remove all the passive components except for a 10uF capacitor at the output voltage. I also had to solder and short some pads together so that we had the guided circuit design in the datasheet and after fixing and testing out the regulators, we retrieved the 3.3V output and 5V output as expected. 
+
+* Adjustable Linear Regulator Schematic (Based our PCB design on this):   
+![image](https://user-images.githubusercontent.com/90663938/143732278-1ec3e175-0e96-43d4-aaea-7f644ccace0a.png)
+
+* Fixed Linear Regulator Schematic (Adjustments that we had to make): 
+![image](https://user-images.githubusercontent.com/90663938/143732337-44968e9f-5009-4af5-945b-51e059764fcc.png)
+
+Once the power subsystem was debugged, I worked on soldering in the relays, the pin headers for the ESP32, and the Darlington Array. I tested the subsystem to make sure that everything worked as expected after soldering each new component to ensure that there was not a specific component causing a failure within a subsystem that we had already tested. After soldering those components, they all worked fine. The next thing I soldered was the OLED, and this was causing problems with our power subsystem. It took us a long time to debug but for some reason, the 3.3V line of our power subsystem was working fine but the 5V line was dropping to a unexpected voltage output of around 1.3V. 
+We thought there may have been a bug with the traces of the components but we created and soldered an identical PCB board with the same duplicate components because we are meant to create 2 PCB boards anyways. With the PCB board soldered and the power subsystem working, we noticed the same issue with the second board.
+I was probing all the test points and pins and I finally figured out what was wrong. The OLED was sinking the DC voltage supply to around 3.3V which caused overall issues with the entire power subsystem because the input voltage was not 12V. I had noticed that the trace connecting the 5V output line to power the OLED was being dropped to almost 0V. That's when I noticed that the VCC and the GND pins of the OLED were flipped due to the footprint being incorrect. The OLED has an internal ground that was sinking our DC power supply and it was lucky that we did not burn out any components by connecting a voltage source to its own ground. To mend this issue, we had to cross align wires and solder in a new alignment so that the correct 5V output can be connected to the correct VCC of the OLED and that the ground was connected to GND of the OLED and not to VCC. 
+
+* OLED in our schematic:
+![image](https://user-images.githubusercontent.com/90663938/143732663-96b98f69-e1ec-41ad-adf3-7cad3686056a.png)
+
+* OLED we are using:
+![image](https://user-images.githubusercontent.com/90663938/143732600-f492db6c-c185-4b0b-8a57-72da71e7c7fd.png)
+
+Notice how the SDA and SCL pins are aligned but the 5V and GND pins are opposite from the schematic to the pin mapping of the OLED we are using. It is good that we resolved this issue so the power subsystem is not compomised. 
+
+
