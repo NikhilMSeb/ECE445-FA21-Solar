@@ -1110,9 +1110,11 @@ We thought there may have been a bug with the traces of the components but we cr
 I was probing all the test points and pins and I finally figured out what was wrong. The OLED was sinking the DC voltage supply to around 3.3V which caused overall issues with the entire power subsystem because the input voltage was not 12V. I had noticed that the trace connecting the 5V output line to power the OLED was being dropped to almost 0V. That's when I noticed that the VCC and the GND pins of the OLED were flipped due to the footprint being incorrect. The OLED has an internal ground that was sinking our DC power supply and it was lucky that we did not burn out any components by connecting a voltage source to its own ground. To mend this issue, we had to cross align wires and solder in a new alignment so that the correct 5V output can be connected to the correct VCC of the OLED and that the ground was connected to GND of the OLED and not to VCC. 
 
 * OLED in our schematic:
+
 ![image](https://user-images.githubusercontent.com/90663938/143732718-4bc5a1bd-d011-40d7-8877-55c882be88fe.png)
 
 * OLED we are using:
+
 ![image](https://user-images.githubusercontent.com/90663938/143732712-181fa236-5c90-450d-9c80-80a2c210c8de.png)
 
 Notice how the SDA and SCL pins are aligned but the 5V and GND pins are opposite from the schematic to the pin mapping of the OLED we are using. It is good that we resolved this issue so the power subsystem is not compomised. 
