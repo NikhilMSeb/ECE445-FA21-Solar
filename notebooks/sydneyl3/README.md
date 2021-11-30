@@ -1128,3 +1128,56 @@ Notice how the SDA and SCL pins are aligned but the 5V and GND pins are opposite
 ![image](https://user-images.githubusercontent.com/90663938/144115741-cf471750-7e44-4128-ac54-5b6297c1e5d6.png)
 
 Maram and I were also able to speak with Kevin to get some assistance on the best way and where to mount our pull-up resistors for the OLED and thermocouples. Once we were confident, we were able to solder THT resistors onto the bottom layer of the PCB and we began testing the OLED communication with the ESP32 on the board. We also resolved the previous issue with the OLED in which the data on the OLED could constantly refresh without the connection of Nikhil's laptop to the microcontroller. The simple fix was to not just reset the power supply but to enable the microcontroller as well. When we connected the ESP32 and the OLED onto the PCB, we were running into issues where sometimes the ESP32 LED which indicates refreshing of the data would light and sometimes it would not light. The OLED would not turn on unless we soldered in jumper cables directly from the ESP32 to the pin headers soldered into the PCB. This was an add fix that we have yet to resolve but our goal is to figure out the solution the following day with some assistance. 
+Additionally, I was able to find code so that we could test our ACS712 current sensor module and sense current with Arduino. Here is the [link](http://robojax.com/node/958) which comes with a video on an explanation for the module and how it operates.  
+```
+#define VIN A0 // define the Arduino pin A0 as voltage input (V in)
+const float VCC   = 5.0;// supply voltage is from 4.5 to 5.5V. Normally 5V.
+const int model = 2;   // enter the model number (see below)
+
+float cutOffLimit = 1.01;// set the current which below that value, doesn't matter. Or set 0.5
+
+/*
+          "ACS712ELCTR-05B-T",// for model use 0
+          "ACS712ELCTR-20A-T",// for model use 1
+          "ACS712ELCTR-30A-T"// for model use 2  
+sensitivity array is holding the sensitivy of the  ACS712
+current sensors. Do not change. All values are from page 5  of data sheet          
+*/
+float sensitivity[] ={
+          0.185,// for ACS712ELCTR-05B-T
+          0.100,// for ACS712ELCTR-20A-T
+          0.066// for ACS712ELCTR-30A-T
+     
+         }; 
+
+
+const float QOV =   0.5 * VCC;// set quiescent Output voltage of 0.5V
+float voltage;// internal variable for voltage
+
+void setup() {
+    //Robojax.com ACS712 Current Sensor 
+    Serial.begin(9600);// initialize serial monitor
+    Serial.println("Robojax Tutorial");
+    Serial.println("ACS712 Current Sensor");
+}
+
+void loop() {
+  
+
+  //Robojax.com ACS712 Current Sensor 
+  float voltage_raw =   (5.0 / 1023.0)* analogRead(VIN);// Read the voltage from sensor
+  voltage =  voltage_raw - QOV + 0.012 ;// 0.000 is a value to make voltage zero when there is no current
+  float current = voltage / sensitivity[model];
+ 
+  if(abs(current) > cutOffLimit ){
+    Serial.print("V: ");
+    Serial.print(voltage,3);// print voltage with 3 decimal places
+    Serial.print("V, I: ");
+    Serial.print(current,2); // print the current with 2 decimal places
+    Serial.println("A");
+  }else{
+    Serial.println("No Current");
+  }
+  delay(500);
+}
+```
