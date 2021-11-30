@@ -1,14 +1,14 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-// ESP32 IP = 192.168.1.129
+// Wi-Fi credentials:
 
-// Wi-Fi credentials 
-const char* ssid = "Linksys01213";
-const char* password = "g824jl1sti";
+// Home Wi-Fi credentials: 
+// const char* ssid = "Linksys01213";
+// const char* password = "g824jl1sti";
 
 // Insert domain name with URL path/IP address with path
-const char* serverName = "";
+const char* serverName = "http://192.168.213.18:8000/panels/api/1/";   // Testing by changing Panel 1 values 
 
 // Testing: 
 // const char* serverName = "http://api.thingspeak.com/update";
@@ -16,7 +16,7 @@ const char* serverName = "";
 
 unsigned long lastTime = 0;
 // Setting time delay to 1 minute (60000 ms)
-unsigned long timerDelay = 5000;  // Set to 5s for testing 
+unsigned long timerDelay = 10000;  // Set to 10s for testing 
 
 void setup() {
   Serial.begin(115200);
@@ -42,27 +42,11 @@ void loop() {
       HTTPClient http;
       
       http.begin(serverName);
-
-      // Testing: 
-      // http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-      // Data to send with HTTP POST
-      // String httpRequestData = "api_key=" + my_Api_key + "&field1=" + String(random(50));           
-      // Send HTTP POST request
-      // int httpResponseCode = http.POST(httpRequestData);
-
-      // POST TYPES: (Documentation) 
-      // HTTP request with a content type: application/x-www-form-urlencoded:
-      // http.addHeader("Content-Type", "application/x-www-form-urlencoded"); 
-      // String httpRequestData = "api_key=tPmAT5Ab3j7F9&sensor=BME280&value1=24.25&value2=49.54&value3=1005.14"; 
-      // int httpResponseCode = http.POST(httpRequestData);
       
       // HTTP request with a content type: application/json:
-      // http.addHeader("Content-Type", "application/json");
-      // int httpResponseCode = http.POST("{\"value1\":\"24.25\",\"value2\":\"49.54\",\"value3\":\"1005.14\"}");
-
-      // HTTP request with a content type: text/plain: 
-      // http.addHeader("Content-Type", "text/plain");
-      // int httpResponseCode = http.POST("Hello, World!");
+      http.addHeader("Content-Type", "application/json");
+      // Testing with Django (Panel 1): 
+      int httpResponseCode = http.POST("{\"title\":\"Panel 1\",\"description\":\"First solar panel being monitored\",\"voltage\":\"5\",\"current\":\"10\",\"temperature\":\"15\",\"configuration\":\"1\"}");
      
       Serial.print("HTTP Response code: ");
       Serial.println(httpResponseCode);
