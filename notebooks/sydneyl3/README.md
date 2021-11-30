@@ -22,7 +22,8 @@
 [11/07/2021: Drafting the Design Aspect of the Final Paper](#11072021-drafting-the-design-aspect-of-the-final-paper) \
 [11/12/2021: Researching the Hardware Communication Aspect of the ESP32](#11122021-researching-the-hardware-communication-aspect-of-the-esp32) \
 [11/19/2021: Part Testing Prior to PCB Arrival](#11192021-part-testing-prior-to-pcb-arrival) \
-[11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing)
+[11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing) \
+[11/29/2021: ADC Testing and New Problems](#11292021-adc-testing-and-new-problems)
 
 
 ## 08/24/2021: Project Ideas and Team Finding
@@ -1118,3 +1119,12 @@ I was probing all the test points and pins and I finally figured out what was wr
 ![image](https://user-images.githubusercontent.com/90663938/143732712-181fa236-5c90-450d-9c80-80a2c210c8de.png)
 
 Notice how the SDA and SCL pins are aligned but the 5V and GND pins are opposite from the schematic to the pin mapping of the OLED we are using. It is good that we resolved this issue so the power subsystem is not compomised. 
+
+
+## 11/29/2021: ADC Testing and New Problems
+**Objectives:** The goal of today was to debug issues with our ADC prior to our demo and to solder in the components that we had already tested to see if they work on the PCB. 
+
+**Outcome:** To test the communication of the ADC, we simply sent data out of the ESP32 in quick bursts to see if we see the data. Once we were able to do that we had gotten around to sending the data from the SDA and seeing the response from the ADC. When doing this, we were running into issues where the the master was not acknowledging the data from the slave. We were simply seeing a negative acknowledgement from the master. The following image was the waveform of the SDA we were meant to see when we sent a burst of data to the MCP3428. 
+![image](https://user-images.githubusercontent.com/90663938/144115741-cf471750-7e44-4128-ac54-5b6297c1e5d6.png)
+
+Maram and I were also able to speak with Kevin to get some assistance on the best way and where to mount our pull-up resistors for the OLED and thermocouples. Once we were confident, we were able to solder THT resistors onto the bottom layer of the PCB and we began testing the OLED communication with the ESP32 on the board. We also resolved the previous issue with the OLED in which the data on the OLED could constantly refresh without the connection of Nikhil's laptop to the microcontroller. The simple fix was to not just reset the power supply but to enable the microcontroller as well. When we connected the ESP32 and the OLED onto the PCB, we were running into issues where sometimes the ESP32 LED which indicates refreshing of the data would light and sometimes it would not light. The OLED would not turn on unless we soldered in jumper cables directly from the ESP32 to the pin headers soldered into the PCB. This was an add fix that we have yet to resolve but our goal is to figure out the solution the following day with some assistance. 
