@@ -257,22 +257,47 @@ In the end, I was able to program the ESP-32 to recognize and connect to a Wi-Fi
 ![image](https://user-images.githubusercontent.com/46250395/141004470-d47025bb-1e4c-42a8-8139-d50deeedcbe1.png) \
 I now need to work on completing configuring the HTTP network functionalities on both the microcontrollers. I have already setup the Postman API for testing the same once the code is ready and executing on the IDE. 
 
-## 11/nn/2021: Completing ESP-32 Stand-alone Wireless Programming 
+## 11/09/2021: Completing ESP-32 Stand-alone Wireless Programming 
 **Objectives:** Finish writing the code for the 2-way POST capabilities of the microcontroller 
 
 **Outcome:** base testing as well as 2-way, 
 
-## 11/nn/2021: Working on Django Framework Back-end
+## 11/11/2021: Working on Django Framework Back-end
 **Objectives:** 
 
 **Outcome:** Setting up DB side, writing POST (entire pathway structure implementation), testing 
 
-## 11/nn/2021: Cleaning up 
+## 11/13/2021: Cleaning up 
 **Objectives:** 
 
-**Outcome:** 
+**Outcome:** Combining pages for Django, ++
 
-## 11/nn/2021: Django-ESP32 Wireless Communication Integration 
+## 11/14/2021: Django-ESP32 Wireless Communication Integration 
 **Objectives:** Integration testing as in Design plan ++
 
 **Outcome:** Issues converting POST on ESP32, 
+
+## 11/18/2021: Software personal 
+**Objectives:** 
+
+**Outcome:** Many to one, dynamic, miscellaneous (GUI) 
+
+## 11/22/2021: Hardware and Software Programming 1 
+**Objectives:** 
+
+**Outcome:** OLED Breadboard testing and Programming, Thermocouples (multi) Breadboard testing and Programming, Worked on ADC circuitry and programming 
+
+## 11/23/2021: Hardware and Software Programming 2
+**Objectives:** 
+
+**Outcome:** Darlington Array Breadboard testing and programming, continued working on ADC issues, Combining code and stand alone ESP (issues?)
+
+## 11/24/2021: Hardware and Software Programmig 3
+**Objectives:** 
+
+**Outcome:** Machine shop (continuation), ++ (soldering, etc. ?) 
+
+## 11/29/2021: Hardware and Software Programming 4
+**Objectives:** Fix issues, meet with Evan, Hardware other stuff 
+
+**Outcome:** Fixed ESP stand alone issue, spent time on ADC working, testing on board (issues)
