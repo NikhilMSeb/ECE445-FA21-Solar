@@ -301,3 +301,18 @@ I now need to work on completing configuring the HTTP network functionalities on
 **Objectives:** Fix issues, meet with Evan, Hardware other stuff 
 
 **Outcome:** Fixed ESP stand alone issue, spent time on ADC working, testing on board (issues)
+
+## 11/30/2021: Hardware and Software Programming 5
+**Objectives:**  
+
+**Outcome:** Current sensor (calibration), 
+
+## 12/01/2021: Hardware and Software Programming 6
+**Objectives:**  
+
+**Outcome:** again current sensor, voltage measurement, integration with OLED and other stuff (calibration), 
+
+## 12/01/2021: Software Programming 1
+**Objectives:** personal personal  
+
+**Outcome:** ManyToOne, update models, update POST stuff (to website), Esp-to-Django confirm, GUI config, config HTTP, 
