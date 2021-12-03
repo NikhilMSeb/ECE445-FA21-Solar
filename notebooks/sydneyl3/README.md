@@ -24,7 +24,7 @@
 [11/19/2021: Part Testing Prior to PCB Arrival](#11192021-part-testing-prior-to-pcb-arrival) \
 [11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing) \
 [11/29/2021: ADC Testing and New Problems](#11292021-adc-testing-and-new-problems) \
-[11/30/2021: Fixes and Current Sensor Implementation](#11302021-fixes-and-current-sensor) \
+[11/30/2021: Fixes and Current Sensor Implementation](#11302021-fixes-and-current-sensor-implementation) \
 [12/01/2021: Culmination of the Monitoring Subsystem](#12012021-culmination-of-the-monitoring-subsystem) \
 [12/02/2021: Final Demo Presentation](#12022021-final-demo-presentations)
 
@@ -1200,8 +1200,12 @@ To resolve this issue, we simply disconnected the load and sometimes the DC supp
 
 
 ## 12/01/2021: Culmination of the Monitoring Subsystem
-**Objectives:** 
-**Outcome:**
+**Objectives:** As all the components to measure the solar panel parameters were realized the day before, we wanted to implement them and add them onto the PCB to observe measurements onto the OLED. Another finalized section of the monitoring subsystem that we had to complete was the switching configurations with the darlington array along with the relays. 
+
+**Outcome:** When we added all the components onto our PCB board, we noticed that the voltage sensing was not updating and required some fixing before before we could work on the relays. It took us a while to figure out and we were following traces, backtracking to points when the voltage sensing was working on its own. The issue was that since we were not implementing the ADC isolator and that the voltage is sent through I2C from through the SDA and SCL pins to the EPS32 microcontroller, the separate ground planes were affecting our ability to take measurements. To resolve this, we soldered one of the ESP32 grounds to the NEG_Output pin where we attach to the voltage divider and our voltage sensing was working again. The current sensor works as expected as well and the thermocouples were updating temperature especially when we added contact heat to it, we saw that value increase. 
+The darlington array we were having some issues with because we were sending the appropriate signals but the relays were in fact closing but not for the appropriate configurations. Since the darlington array was already testing with the relays on a breadboard, we know that the code works and we needed to map out the control signals appropriately from the ESP32 to the darlington. We were measuring the output of the ESP32 pins that were toggled high and they outputted around 12 volts whilst the output of the darlington varied from 1V, 4V, to 11V which was unusual. We soldered a darlington array on the breakout board to test them on the breadboard again to see if we could figure out the issue but everything was working fine on the the breaedboard. We hope to resolve and figure out this issue because for the sake of configuring the solar panels, it is an important aspect of our monitoring subsystem.
+We were also able to meet with Kevin today and he was able to help us set up the solar panels on the roof so that we could observe and monitor voltage, current, and temperature readings from the solar panels. Since the solar panels on the roof already have an Attabox mounted with a board solely responsible for manually switching the solar cell configuration,  we would have to go out on the roof to change from 32, to 64, to 128-cell configurations. Therefore, we only operated on 32-cells to test our measurements. Since there was very little to no sun by the time we were able to set up, we planned on coming in the next morning to utilize and measure parameters of the actual solar panels. 
+We were able to utilize another small solar panel which outputs around 9V and 4A of current at our workstation and we were able to shine a lamp on it and extract power from there as a substitute at the moment. We were able to pull voltage, current, and temperature readings from there as well as having it update and send POST requests to the website. 
 
 ## 12/02/2021: Final Demo Presentation
 **Objectives:** 
