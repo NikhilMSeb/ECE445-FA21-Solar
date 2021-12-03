@@ -23,8 +23,10 @@
 [11/12/2021: Researching the Hardware Communication Aspect of the ESP32](#11122021-researching-the-hardware-communication-aspect-of-the-esp32) \
 [11/19/2021: Part Testing Prior to PCB Arrival](#11192021-part-testing-prior-to-pcb-arrival) \
 [11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing) \
-[11/29/2021: ADC Testing and New Problems](#11292021-adc-testing-and-new-problems)
-
+[11/29/2021: ADC Testing and New Problems](#11292021-adc-testing-and-new-problems) \
+[11/30/2021: Fixes and Current Sensor Implementation](#11302021-fixes-and-current-sensor) \
+[12/01/2021: Culmination of the Monitoring Subsystem](#12012021-culmination-of-the-monitoring-subsystem) \
+[12/02/2021: Final Demo Presentation](#12022021-final-demo-presentations)
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
@@ -1182,3 +1184,26 @@ void loop() {
   delay(500);
 }
 ```
+
+
+## 11/30/2021: Fixes and Current Sensor Calibration
+**Objectives:** The goal of today was to add another aspect of our monitoring subsystem. With most of the I2C communication from the ESP32 working with the exception of the ADC isolator, we want to implement our current sensor to ensure that it works and measures current as expected. The voltage divider and sensing is also something that we want to complete. With the temperature sensor working as expected and the complete addition of voltage and current sensor, most of our monitoring subsystem is complete.
+
+**Outcome:** We first tested out the current sensor on a breadboard and we read the base output voltage when there was no current flowing through it. This output voltage was simply the imput voltage, in this case 5V, divided by 2 so we observed a 2.5V output. Since we attached a load to the input of the current sensor, we were reading very minimal values of the current and it was extremely difficult to observe a change in the output voltage or to see whether the current was being affected. Due to the sensitivity being 100mV/A, having about 0.02 Amps flowing through the load only gives a change of around 20mV. 
+To resolve this issue, we simply disconnected the load and sometimes the DC supply would not output a current even when it was set, the solution to this was to ensure that the voltage output was outputting a voltage along with it as well. With the Keithley DC supply, we were able to a supply a max of around 5A due to the limitations of the supply that we used but we were observing around a 500mV increase from our base value of 2.5V when we fed 5A through it. Although there were some differences in the each of the current sensors reference value and discrepencies within the voltage with varied as we went to high levels of current, we resolved this by going through the values and calibrating both the voltage and current manually. 
+
+* Process for Calibrating the Voltage:
+![image](https://user-images.githubusercontent.com/90663938/144564911-fcc87fc6-7e3d-46dc-870a-1b912e56e3ed.png)
+
+* Process for Calibrating the Current:
+![image](https://user-images.githubusercontent.com/90663938/144565054-3c7365a9-a542-4878-b4b8-1445042ee25d.png)
+
+
+## 12/01/2021: Culmination of the Monitoring Subsystem
+**Objectives:** 
+**Outcome:**
+
+## 12/02/2021: Final Demo Presentation
+**Objectives:** 
+**Outcome:**
+
