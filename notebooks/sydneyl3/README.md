@@ -24,9 +24,9 @@
 [11/19/2021: Part Testing Prior to PCB Arrival](#11192021-part-testing-prior-to-pcb-arrival) \
 [11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing) \
 [11/29/2021: ADC Testing and New Problems](#11292021-adc-testing-and-new-problems) \
-[11/30/2021: Fixes and Current Sensor Implementation](#11302021-fixes-and-current-sensor-implementation) \
+[11/30/2021: Fixes and Current Sensor Calibration](#11302021-fixes-and-current-sensor-calibration) \
 [12/01/2021: Culmination of the Monitoring Subsystem](#12012021-culmination-of-the-monitoring-subsystem) \
-[12/02/2021: Final Demo Presentation](#12022021-final-demo-presentations)
+[12/02/2021: Final Demo Presentation](#12022021-final-demo-presentation)
 
 ## 08/24/2021: Project Ideas and Team Finding
 **Objectives:** Find a team and choose a good project idea to work on over the semester.
