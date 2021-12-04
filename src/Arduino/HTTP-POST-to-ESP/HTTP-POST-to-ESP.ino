@@ -1,9 +1,7 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
 
-// ESP32 IP = 192.168.1.129
-
-const char* ssid = "Linksys01213";
+const char* ssid = "Linksys01213_5GHz";
 const char* password = "g824jl1sti";
  
 AsyncWebServer server(80);
@@ -14,7 +12,7 @@ void setup() {
   WiFi.begin(ssid, password);
  
   while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
+    delay(500);
     Serial.println("Connecting to WiFi..");
   }
  

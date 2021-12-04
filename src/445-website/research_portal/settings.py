@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-1!7=ckr4h&llrth=v+s4&m-hxy79w_3d9@pq_2&1^%_nhuvuvm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,11 +41,14 @@ INSTALLED_APPS = [
     'team', 
     'users', 
     'django_extensions',
+    'rest_framework', 
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -131,3 +134,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'opening_page'
 
 LOGOUT_REDIRECT_URL = 'opening_page'
+
+CSRF_COOKIE_SECURE = False
+CORS_ORIGIN_ALLOW_ALL = True 
+#CORS_ORIGIN_WHITELIST = (
+#    'http://localhost:8081',
+#)
+
+MIDDLEWARE.pop(MIDDLEWARE.index(
+    "django.middleware.csrf.CsrfViewMiddleware",
+))

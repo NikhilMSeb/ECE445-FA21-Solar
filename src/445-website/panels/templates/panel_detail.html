@@ -4,11 +4,52 @@
 <h1>{{ panel.title }}</h1>
 <div class="row">
     <div class="col-md-4">
+        <br>
         <h5>Panel Details:</h5>
         <p>{{ panel.description }}</p>
         <br>
-        <h5>Panel Specs:</h5>
-        <p>{{ panel.facts }}</p>
+        <h5>Panel IP Address:</h5>
+        <p>{{ panel.IP }}</p>
+        <br>
+        <h5>Panel Configuration:</h5>
+        <p>{{ panel.configuration }}</p>
+        <br>
+        <h5>Panel Voltages:</h5>
+        <!-- {% for x in voltage %}
+            <p>{{ x }}</p>
+        {% endfor %} -->
+        <p>X Axis: 20 Newest Values from Oldest (1) to Newest (20)</p>
+        <p>Y Axis: Voltage in Volts (V) (2 decimal precision)</p>
+        {% autoescape off %}
+        {{ volt_plot }}
+        {% endautoescape %}
+        <br>
+        <h5>Panel Currents:</h5>
+        <!-- {% for x in current %}
+            <p>{{ x }}</p>
+        {% endfor %} -->
+        <p>X Axis: 20 Newest Values from Oldest (1) to Newest (20)</p>
+        <p>Y Axis: Current in Amperes (A) (2 decimal precision)</p>
+        {% autoescape off %}
+        {{ current_plot }}
+        {% endautoescape %}
+        <br>
+        <h5>Panel Temperatures:</h5>
+        <!-- {% for x in temp %}
+            <p>{{ x }}</p>
+        {% endfor %} -->
+        <p>X Axis: 20 Newest Values from Oldest (1) to Newest (20)</p>
+        <p>Y Axis: Temperature in Celsius (*C) (2 decimal precision)</p>
+        {% autoescape off %}
+        {{ temp_plot }}
+        {% endautoescape %}
+        <br>
+        <form action="config_url/" method="POST">
+            <label for="config_form"> Enter Configuration 1, 2 or 3: </label>
+            <input id="config_form" type="text" name="config_field">
+            <input type="submit" value="OK">
+        </form>
+        <br>
     </div>
 </div>
 {% endblock %}
