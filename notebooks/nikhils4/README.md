@@ -315,4 +315,14 @@ I now need to work on completing configuring the HTTP network functionalities on
 ## 12/01/2021: Software Programming 1
 **Objectives:** personal personal  
 
-**Outcome:** ManyToOne, update models, update POST stuff (to website), Esp-to-Django confirm, GUI config, config HTTP, 
+**Outcome:** ManyToOne, update models, update POST stuff (to website), Esp-to-Django confirm, GUI config (?)
+
+## 12/02/2021: Software Programming 2 and Demo
+**Objectives:** Wrap up, demo, everything in between 
+
+**Outcome:** 
+
+## 12/03/2021: Presentation and Tech Report Work 
+**Objectives:** 
+
+**Outcome:** 
