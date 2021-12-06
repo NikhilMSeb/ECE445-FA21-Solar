@@ -21,6 +21,7 @@
 [10/30/2021: PCB Completion](#10302021-pcb-completion) \
 [11/07/2021: Drafting the Design Aspect of the Final Paper](#11072021-drafting-the-design-aspect-of-the-final-paper) \
 [11/12/2021: Researching the Hardware Communication Aspect of the ESP32](#11122021-researching-the-hardware-communication-aspect-of-the-esp32) \
+[11/14/2021: Researching the Hardware Communication Aspect of the ESP32 Part II](#11122021-researching-the-hardware-communication-aspect-of-the-esp32-part-ii) \
 [11/19/2021: Part Testing Prior to PCB Arrival](#11192021-part-testing-prior-to-pcb-arrival) \
 [11/24/2021: PCB Retrieval and Additional Testing](#11242021-pcb-retrieval-and-additional-testing) \
 [11/29/2021: ADC Testing and New Problems](#11292021-adc-testing-and-new-problems) \
@@ -1031,7 +1032,7 @@ void loop() {
 ```
 
 
-## 11/12/2021: Researching the Hardware Communication Aspect of the ESP32
+## 11/14/2021: Researching the Hardware Communication Aspect of the ESP32 Part II
 **Objective:** Research more on how the ESP32 can communicate with the ADC isolator and also how the ESP32 can send high and low signals to the Darlington array to trigger close the switches of our relays.
 
 **Outcome:** We did additional research for the ADC isolator because there was not a specific tutorial that explained how an ESP32 microcontroller could communicate with the specific ADC that we chose to utilize in our project. However, we researched and looked at the libraries to gain better insight by looking at how the microcontroller communicated with different ADCs and sampled code from there for our project. 
