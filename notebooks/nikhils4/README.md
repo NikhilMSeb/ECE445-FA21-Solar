@@ -163,6 +163,11 @@ The final reviewed draft of our Design Document can be found within this reposit
   * https://electropeak.com/learn/create-a-web-server-w-esp32/
   * https://lastminuteengineers.com/creating-esp32-web-server-arduino-ide/
 
+## 10/11/2021: Plan Integration and discuss with Teammates  
+**Objectives:** Assess coding put together, discuss parts and PCB integration from hardware point of view (catch up)
+
+**Outcome:** ++
+
 ## 10/19/2021: Post Design Submission Update Meeting with TA  
 **Objectives:** Discuss our progress so far on our board layout and the planned approach for software capabilties with TA Evan 
 
