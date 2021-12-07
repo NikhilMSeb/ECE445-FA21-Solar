@@ -325,7 +325,7 @@ synchronized to the sampling of bits by a clock signal shared between the master
 **Outcome:** Many changes were included into the design document. One key detail was that our subsystems were not correctly organized and in our block diagram, it was good to have multiple subsystems instead of just simply components. Therefore, I updated and made specific flow lines and details so that the power and data flow could be easily followed along with understanding which components were included. I also updated the requirements and verifications for the hardware aspect of the design document and our high-level requirements needed to be changed because prior, they were solely based on the assumption that the solar panel could even achieve it's max voltage of 85.6V and that we would be taking measurement with that voltage. This is not the case and so, our solar panel parameter measurements are based on how accurate it can be compared to the measurements taken in a lab environment. 
 
 * Final Block Diagram
-![finalblockdiagram](https://user-images.githubusercontent.com/90663938/142573964-645d20f7-1245-4b83-bc9a-50212bb2f99c.png)
+[Final Block Diagram (1).pdf](https://github.com/NikhilMSeb/ECE445-FA21-Solar/files/7665774/Final.Block.Diagram.1.pdf)
 
 
 ## 10/29/2021: Finalized Relay Subsystem
