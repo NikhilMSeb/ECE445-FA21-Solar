@@ -1,7 +1,7 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-
-const char* ssid = "Linksys01213_5GHz";
+ 
+const char* ssid = "Linksys01213";
 const char* password = "g824jl1sti";
  
 AsyncWebServer server(80);
@@ -12,7 +12,7 @@ void setup() {
   WiFi.begin(ssid, password);
  
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+    delay(1000);
     Serial.println("Connecting to WiFi..");
   }
  

@@ -1,17 +1,17 @@
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+//#include <Wire.h>
+//#include <Adafruit_GFX.h>
+//#include <Adafruit_SSD1306.h>
 
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+//#define SCREEN_WIDTH 128 // OLED display width, in pixels
+//#define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
 // Test LED: 
-#define ONBOARD_LED  2
+//#define ONBOARD_LED  2
 
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+//Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 // Code to get thermocouple addresses:
 //OneWire ds(4);  //data wire connected to GPIO 4
@@ -54,46 +54,51 @@ DeviceAddress sensor1 = { 0x28, 0x2D, 0x5E, 0xB8, 0xD, 0x0, 0x0, 0x48 };
 DeviceAddress sensor2 = { 0x28, 0x13, 0xAB, 0xB8, 0xD, 0x0, 0x0, 0xC2 };
 
 void setup(void){
-  //Serial.begin(115200);
-  pinMode(ONBOARD_LED,OUTPUT);
+  Serial.begin(115200);
+  //pinMode(ONBOARD_LED,OUTPUT);
   
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
-  delay(2000);
-  display.clearDisplay();
-  
+  //display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
+  //delay(2000);
+  //display.clearDisplay();
+
   sensors.begin();
 }
 
 void loop(void){ 
   // Test: 
-  digitalWrite(ONBOARD_LED,HIGH);
-  delay(100);
-  digitalWrite(ONBOARD_LED,LOW);
+  //digitalWrite(ONBOARD_LED,HIGH);
+  //delay(100);
+  //digitalWrite(ONBOARD_LED,LOW);
+
+  //sensors.begin();
   
-  //Serial.print("Requesting temperatures...");
+  Serial.print("Requesting temperatures...");
   sensors.requestTemperatures(); // Send the command to get temperatures
-  //Serial.println("DONE");
+  Serial.println("DONE");
 
   float temp1 = sensors.getTempC(sensor1);
   float temp2 = sensors.getTempC(sensor2);
   
-  //Serial.print("Sensor 1(*C): ");
-  //Serial.println(sensors.getTempC(sensor1));
+  Serial.print("Sensor 1(*C): ");
+  Serial.println(sensors.getTempC(sensor1));
  
-  //Serial.print("Sensor 2(*C): ");
-  //Serial.println(sensors.getTempC(sensor2));
+  Serial.print("Sensor 2(*C): ");
+  Serial.println(sensors.getTempC(sensor2));
 
-  display.clearDisplay();
-  display.setCursor(0, 40);
-  display.print("Temp.(Center): ");
-  display.print(temp1);
-  display.println("C");
-  display.display();
-  display.setCursor(0, 55);
-  display.print("Temp.(Outer): ");
-  display.print(temp2);
-  display.println("C");
-  display.display();
+  //display.clearDisplay();
+  //display.setCursor(0, 15);
+  //display.println("Temperature Values!");
+  //display.display();
+  //display.setCursor(0, 30);
+  //display.print("Temp.(Center): ");
+  //display.print(temp1);
+  //display.println("C");
+  //display.display();
+  //display.setCursor(0, 45);
+  //display.print("Temp.(Outer): ");
+  //display.print(temp2);
+  //display.println("C");
+  //display.display();
   
   delay(2000);
 }

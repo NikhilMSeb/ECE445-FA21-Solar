@@ -29,8 +29,8 @@ void loop() {
 
   digitalWrite(sig6Pin, HIGH);
   digitalWrite(sig5Pin, LOW);
-  digitalWrite(sig4Pin, HIGH);
-  digitalWrite(sig3Pin, LOW);
+  digitalWrite(sig4Pin, LOW);
+  digitalWrite(sig3Pin, HIGH);
   digitalWrite(sig2Pin, LOW);
   digitalWrite(sig1Pin, LOW);
   delay(1000);

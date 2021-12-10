@@ -69,14 +69,19 @@ void loop() {
   sensors.requestTemperatures();  // Send the command to get temperatures
   // Serial.println("DONE");
 
-  float temp1 = sensors.getTempC(sensor1);
-  float temp2 = sensors.getTempC(sensor2);
+  temp1 = sensors.getTempC(sensor1);
+  temp2 = sensors.getTempC(sensor2);
   
   // Serial.print("Sensor 1(*C): ");
   // Serial.println(sensors.getTempC(sensor1));
   // Serial.print("Sensor 2(*C): ");
   // Serial.println(sensors.getTempC(sensor2));
   delay(1000);
+
+  // Temperature safety - adjust relays to 0 config 
+  if((temp1>40) || (temp2>40)){
+    Serial.println("Overheating!!!");
+  }
 
   // Voltage Measurement: 
   ADC_VALUE = analogRead(Analog_channel_pin);
@@ -106,6 +111,11 @@ void loop() {
     voltage_value_real_adj = (1.0279*voltage_value_real) - 0.5137;
   }
 
+  // Voltage safety - adjust relays to 0 config
+  if(voltage_value_real_adj > 40){
+    Serial.println("Overvoltage!!!");
+  }
+
   // Current Measurement: 
   double final_amps = 0.0;
   int RawSum = 0;
@@ -113,14 +123,18 @@ void loop() {
     RawSum += analogRead(analogIn); 
   }
   RawValue = RawSum/100;
-  Voltage = (RawValue / 4095.0) * 3300; // Gets you mV
+  Voltage = (RawValue / 4095.0) * 3300;   // Gets you mV
   Amps = ((Voltage - ACSoffset) / mVperAmp);
   final_amps = (0.9304*Amps) - (0.0337*Amps*Amps) - 0.0124;
   if(final_amps < 0.0){
     final_amps = 0.0;
-  }
+  } 
 
-  // OLED Display: 
+  // Current safety - adjust relays to 0 config
+  if(final_amps > 2){
+    Serial.println("Overcurrent!!!");
+  }
+  
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -147,5 +161,5 @@ void loop() {
   display.println("C");
   display.display();
 
-  delay(1000); 
+  delay(1000);
 }

@@ -50,7 +50,7 @@ void loop() {
   //Serial.print("Voltage: ");
   //Serial.print(voltage_value);
   //Serial.println("V");
-  //Serial.print("Voltage_adj: ");
+  //Serial.print("Voltage adj: ");
   //Serial.print(voltage_value_adj);
   //Serial.println("V");
   //delay(500);
@@ -65,22 +65,30 @@ void loop() {
   if(voltage_value_real_adj>7.5){
     voltage_value_real_adj = (1.0193*voltage_value_real);
   }
+
+  //Serial.print("Real Voltage: ");
+  //Serial.print(voltage_value_real);
+  //Serial.println("V");
+  //Serial.print("Real Voltage adj: ");
+  //Serial.print(voltage_value_real_adj);
+  //Serial.println("V");
+  //delay(500);
   
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(0, 20);
-  //display.print("Meas. Vol.: ");
-  //display.print(voltage_value);
-  //display.println("V");
-  //display.display();
-  //display.setCursor(0, 30);
-  //display.print("Real Vol.: ");
-  //display.print(voltage_value_real);
-  //display.println("V");
-  //display.display();
-  //display.setCursor(0, 45);
-  display.print("Voltage: ");
+  display.setCursor(0, 15);
+  display.print("Meas. Vol.: ");
+  display.print(voltage_value);
+  display.println("V");
+  display.display();
+  display.setCursor(0, 30);
+  display.print("Real Vol.: ");
+  display.print(voltage_value_real);
+  display.println("V");
+  display.display();
+  display.setCursor(0, 45);
+  display.print("Adj. Voltage: ");
   display.print(voltage_value_real_adj);
   display.println("V");
   display.display();

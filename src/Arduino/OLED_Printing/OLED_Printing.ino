@@ -31,9 +31,10 @@ void loop() {
   delay(100);
   digitalWrite(ONBOARD_LED,LOW);
   
-  int voltage = 30;
-  int current = 20;
-  int temp = 10; 
+  float voltage = 0.0;
+  float current = 4.05;
+  float temp1 = 25.62; 
+  float temp2 = 25.56;
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 5);
@@ -47,13 +48,13 @@ void loop() {
   display.println("A");
   display.display(); 
   display.setCursor(0, 35);
-  display.print("Temp. (Center): ");
-  display.print(temp);
+  display.print("Temp.(Center): ");
+  display.print(temp1);
   display.println("C");
   display.display();
   display.setCursor(0, 50);
-  display.print("Temp. (Outer): ");
-  display.print(temp);
+  display.print("Temp.(Outer): ");
+  display.print(temp2);
   display.println("C");
   display.display();
 }
