@@ -194,7 +194,7 @@ From a larger team point of view for our project's hardware side, we needed to c
 Coming to the software side of the project that I am working on, I was able to explain how I will have a 3-object approach to the entire software side - the microcontroller as an access point that will be programmed on Arduino IDE that receives POST requests for configurations and sends real-time POST requests of monitored data, a back-end server that will be hosted locally and written in Flask and Python which will have a mirrored reflection of POST request capability and also communicate with the webpage GUI, and finally the front-end webpage of our Portal that at least needs to be locally hosted and show real-time updates and visualization. \
 While the approach itself was sound, Evan suggested using ORM (Object Relational Mapping) and a framework like Django to allow for easier handling of our webpage structure itself. I will be looking into these options at the earliest to be able to put together a firmer design for this before implementation. We also decided to order at least the microcointroller as soon as possible to be able to begin on programming it. 
 
-Note: We had a follow-up meeting on 10/22/2021 that covered and clarified similar points, as well as how we might improve our Design Document 
+Note: We had a follow-up meeting with Evan on 10/22/2021 that covered and clarified similar points, as well as how we might improve our Design Document. 
 
 ## 10/23/2021: Compiling Research into Django Framework and Data Visualization
 **Objectives:** Finding and putting together information on building a a website using Django and how we would setup GUI
@@ -281,79 +281,122 @@ I now need to work on completing configuring the HTTP network functionalities on
 ## 11/09/2021: Completing ESP-32 Stand-alone Wireless Programming 
 **Objectives:** Finish writing the code for the 2-way POST capabilities of the microcontroller 
 
-**Outcome:** base testing, 2-way
+**Outcome:** Following all the issues that were faced to set up the Arduino IDE, I could now actually work on the 2-way wireless commuication capabilities of the ESP32. As planned for modular testing I was able to implement stand-alone POST send and POST receive capabilities for the ESP32 and then test the same.
+
+![POST-from-ESP32-test](https://user-images.githubusercontent.com/46250395/145508299-627e4b5a-3794-4570-ba4e-21fc4e53e48b.png) \
+<img width="960" alt="POST-from-ESP32-test-receive" src="https://user-images.githubusercontent.com/46250395/145508314-3f5268a7-855a-4fd6-b759-9f3f18977eea.png"> 
+
+The pictures above show the successful sending of POST requests by the ESP32 (top, success prints on serial monitor), as well as the API that I used to test reception of these requests visually (bottom, plot seen of sent data points). This was implemented using the *WiFi.h* and *HTTPClient.h* libraries on the Arduino IDE. Through this I could achieve part of 1 requirement of the Research Hub subsystem and complete functional testing for it. 
+
+![POST-to-ESP32-test](https://user-images.githubusercontent.com/46250395/145509412-6bd6b99f-248b-43f1-9f7f-10ecc2bbc8b4.png) 
+
+The picture above shows successful reception of POST requests by the ESP32 (serial monitor showing reception of raw body), where the test request was sent through the Postman API as planned (seen in the background of the picture). This was implemented using the *WiFi.h* and *ESPAsyncWebServer.h* libraries on the Arduino IDE. This, combined with the first 2 pictures, shows that I could successfully achieve the base requirement and verification through functional test of 1 requirement of the Research Hub subsystem (wireless communication capability of the ESP32 to send and receive POST requests). 
 
 ## 11/11/2021: Working on Django Framework Back-end
 **Objectives:** Begin working on and establish the base for the Django back-end, including initial work for HTTP commuication and modular testing 
 
-**Outcome:** back-end - Setting up DB side, writing POST (entire pathway structure implementation), testing 
+**Outcome:** Since the front-end of the Django project now had it's foundation and skeleton complete, and I completed the base requirements for the ESP32's wireless communication capabilities, I started working on the back-end external server and the POST capabilities of the Django project. For the back-end itself, the Django ORM handled a lot of the database and data management granularities, so I needed to focus on managing the actual POST capabilities that were planned. To do this, I used the following steps:
+* Installing and setting up the Django-REST framework which I used for this functionality 
+* Adjust the home application (research_portal) *settings.py* to not only use the imported package but also edit webpage settings like CORS
+* Create a Serializer class for the solar panel model I had created earlier 
+* Define new URL routes in *urls.py* for the POST API that I am creating and setting them up 
+* Create new views in *views.py* to handle the API URLs and use the serializer to parse received data 
+
+![POST-to-Django-test](https://user-images.githubusercontent.com/46250395/145509502-6e31e36b-d191-41c0-82b0-f60dab82cb04.png)
+
+The picture above shows the final test that I did for part of 1 requirement of the Research Hub subsystem - it is the modular test that the Django framework has the ability to receive and store incoming POST requests. The Postman API was used as planned for this testing (as seen in the picture), and the results we see above are that the locally hosted Django server could successfully receive and process a POST request aimed at Panel 2 ("200 OK" response seen). \
+After this, I started working on the second half of this requirement, which is that the Django project should be able to send POST requests too (for the configuration input from the user on the portal). Since this needs the GUI also completed on the UI/UX end, I have not fully functionally tested this. But, I have code structurally ready for implementing this POST ability (changes needed to *urls.py* and *views.py*, as well as integration in HTML). 
 
 ## 11/13/2021: Codebase Clean-up and Integrating Django Applications
 **Objectives:** Review all of the existing codebase, update GitHub after changes; Finalize working details of Django front-end
 
-**Outcome:** Combining pages for Django successfully (2 pics), adjusting code for not working stuff, 
+**Outcome:** There were 2 functional aspects of the Django front-end that was completed so far that needed improvement. The first of these was that, while separating front-end functionality into separate applications was good for development, different parts of the front-end were disconnected right now - there was no way to move between the successful login page and our panel dashboard page. To fix this I added default page routing for the project as whole (in the primary research_portal application), and then I added reverse references in both the successful login page and the panel dashboard page to allow for access between them. The 2 pictures below show these newly added hyperlinks between the 2 mentioned parts of the front-end when running the Django project:  
+
+![Login Welcome](https://user-images.githubusercontent.com/46250395/145511755-923d0c0e-ecb0-4921-9fea-d25c73543ba0.png) \
+![Homepage](https://user-images.githubusercontent.com/46250395/145511767-d5638456-187f-4111-96de-2ddb090cc314.png)
+
+Moving on, due to similar front-end connection issues, while I had functioning user authentication in place, I had not been able to enforce this across the portal. This meant that while the landing page of the portal forced authentication, when the server was running someone could simply use the right URL to navigate to data that was supposed to be secured. To fix this I built on the above connection specifics that were in place and also leveraged the in-built *django.contrib.auth.decorators* to force authentication for access to the entire portal. The 2 pictures below show the base login page and form (upper, URL is just that of login page) and the redirect that occurs when trying to access parts of the portal when not authenticated first (bottom, URL shows redirect from trying to directly access "/panels"):
+
+![Login](https://user-images.githubusercontent.com/46250395/145511864-aa3f56ca-2960-4b3a-a33a-9ca1bb8224fe.png) \
+![Redirect Login](https://user-images.githubusercontent.com/46250395/145511876-24c24ea7-4c32-4c19-9b82-abda8007920f.png)
+
+Furthermore, at this point I had a lot of code that was completed on the ESP32-Arduino end as well as for the Django project's front-end and back-end. So I took some time to clean up all of this code to allow for redability and prepare for later integration. There was also at this point lots of comments, references, and non-functioning code that needed to be taken care of, so I did that as well. At the end of it all, I updated this Git repository's "src" folder with both the Django project and Arduino programming code (separately) so as to maintain good documentation. 
 
 ## 11/14/2021: Django-ESP32 Wireless Communication Integration 
-**Objectives:** Integration testing as in Design plan ++
+**Objectives:** Integration testing of Research Hub wireless capabilties as in Design Documentation plan
 
-**Outcome:** Issues converting POST on ESP32
+**Outcome:** Having completed a lot of the other functionality and miscellaneous tasks, I now wanted to fully meet the wireless communication requirements and verifications of the Research Hub subsystem by completing the integration testing of the same. But, while I had already proven functionality of the ESP32 to send POST requests successfully and the Django framework to receive POST requests successfully, their direct integration was failing for some reason. On analysis it looked like the ESP32 and the Django project were not discoverable to each other even though they were both on the same network. \
+During our next meeting with our TA Evan 2 days later, I tried to debug this issue. Evan was able to help me fix this problem with two adjustments. Firstly, running the Django server specifically on localhost (IP: 0.0.0.0) and a specific port (8000) - this allowed me to specify an exact server pathway to the ESP32, allowing it to find the Django server. Secondly, in order to get this working exactly, I also editted the Django project's base *settings.py* to include *django.middleware* reservations and edit CORS permissions based on Evan's suggestions. This fixed our issue and I was able to prove the integration functionality that I was aiming for as not only was I able to send POST requests from the ESP32 successfully to the Django server which was then recognized in the terminal and stored correctly as per the API, but when Evan tried to send data to the Django server on the same network he could also post successfully! 
 
 ## 11/18/2021: Researching Final Components of Software Subsystem  
 **Objectives:** Folowing our last meeting with TA Evan, researching all the "loose end" components of the software side of the project 
 
-**Outcome:** Many to one, dynamic, miscellaneous (GUI) 
+**Outcome:** During the aforementioned meeting with our TA (as part of the mock demo), I also wanted to clarify how to handle incoming data to the Django server. Specifically, I discussed with Evan whether incoming POST requests should update the dedicated solar panel models directly or if I should use ManyToOne Django relationships to spawn new measurement models (isolated for voltage, current, and temperature) and then map them to the corresponding solar panel models. We dedcied that the latter would be the better approach andmoved forward with that. Furthermore, I had planned for the Django front-end to have dynamic updates on receiving data, and of course that each panel-specific page has GUI in place to process user-input panel configurations. With this in mind, I did some research regarding all this and couold compile the following resources to use: 
+* https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_one/: Documentation regarding Django's ManyToOne relationships 
+* https://docs.djangoproject.com/en/3.2/ref/models/relations/: Documentation regarding the *ForeignKey* field that needs to be used for ManyToOne in Django 
+* https://www.pluralsight.com/guides/work-with-ajax-django: Tutorial regarding using AJAX scripting for dynamic updates on the Django framework 
+* https://docs.djangoproject.com/en/3.2/topics/forms/: Documentation regarding Forms and their management in Django (for the user-input functionality)
 
 ## 11/22/2021: Beginning Firmware Work and Hardware Integration
-**Objectives:** 
+**Objectives:** Start working on firmware for the available parts, including testing and any possible integration 
 
 **Outcome:** OLED Breadboard testing and Programming, Thermocouples (multi) Breadboard testing and Programming, Worked on ADC circuitry and programming 
 
 ## 11/23/2021: Continuing Firmware Work and Hardware Integration (1)
-**Objectives:** 
+**Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole 
 
 **Outcome:** Darlington Array Breadboard testing and programming, continued working on ADC issues, Combining code and stand alone ESP (issues?)
 
 ## 11/24/2021: Continuing Firmware Work and Hardware Integration (2)
-**Objectives:** 
+**Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole 
 
 **Outcome:** Machine shop (continuation), ++ (soldering, etc. ?) 
 
 ## 11/29/2021: Continuing Firmware Work and Hardware Integration (3)
-**Objectives:** Fix issues, meet with Evan, Hardware other stuff 
+**Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole 
 
-**Outcome:** Fixed ESP stand alone issue, spent time on ADC working, testing on board (issues)
+**Outcome:** Fixed ESP stand alone issue, spent time on ADC working, testing on board (issues) \
+Fix issues, meet with Evan, Hardware other stuff 
 
 ## 11/30/2021: Continuing Firmware Work and Hardware Integration (4)
-**Objectives:**  
+**Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole
 
 **Outcome:** Current sensor (calibration), 
 
 ## 12/01/2021: Final Round of Firmware Work and Hardware Debugging 
-**Objectives:** 
+**Objectives:** Finish work on testing and firmware integration for parts as well as PCB testing on my end 
 
 **Outcome:** again current sensor, voltage measurement, integration with OLED and other stuff (calibration), 
 
 ## 12/01/2021: Updating Software Functionalities and Completing Planned Integration Testing 
-**Objectives:** 
+**Objectives:** Work on planned software functionalities and their integration along with all applicable planned testing 
 
 **Outcome:** ManyToOne, update models, update POST stuff (to website), Esp-to-Django confirm, GUI config (?)
 
 ## 12/02/2021: Final Software and Firmware Work as well as Completing Demo
-**Objectives:** Wrap up, demo, everything in between
+**Objectives:** Wrap up remaining software and firmware tasks before Final Demo and then complete the Final Demo 
 
 **Outcome:** GUI work, testing in lab - wifi comms in lab and final test, Darlington update, demo
 
 ## 12/05/2021 - 12/06/2021: Final Presentation Preparation and Completion 
-**Objectives:** 
+**Objectives:** Put together all the work done for the project in a presentation, and prepare for the same 
 
-**Outcome:** 
+**Outcome:** Following our project demonstration, we worked together as a team to compile a presentation to present to Professor Schuh and the ECE 445 course staff. I handled the formatting and style of the entire deck of slides for the presentation, as well as including all of the firmware and software details and our test results, while my teammates added in their notes on the hardware design. Given below is a useful set of flowcharts I put together for the same - it is an advanced version of the flowcharts I created for our Design Document that visualizes the final working flow of the software itself: 
+
+![image](https://user-images.githubusercontent.com/46250395/145516471-4fb61144-56c4-422e-ba85-69eaa39adad0.png)
+
+We also practiced the presentation multiple times and got ready for our event on 12/07/2021. For the actual presentation itself, I covered all of the software and firmware functionalities, while also introducing the project from a technical point of view. \
+The final set of slides used for our Final Presentation can be found within this repository [here](https://github.com/NikhilMSeb/ECE445-FA21-Solar/blob/main/team%20documents/ECE%20445%20Team%2010%20Final%20Presentation.pptx)
 
 ## 12/07/2021 - 12/08/2021: Final Report Completion
-**Objectives:** 
+**Objectives:** Put together all notes and work done for the project and submit the Final Report assignment 
 
-**Outcome:** 
+**Outcome:** The last major assignment for the semester was now to compile and submit the Final Report for our work over the semester on our project. For this we took a few details from our Final Presentation, while mainly building up the document from our final Design Document and from our notebooks (refer to earlier entries for various details and images that were used). \
+I handled the formatting and structure of the entire document and even had meetings with the ECE Editorial Services team for this to ensure everything was in place. I also added most of the key figures, all the appendices, and details of testing, along with all the detail regarding the software and firmware parts of our project of course. \
+The final version of the document that was submitted for the Final Report can be found within this repository [here](https://github.com/NikhilMSeb/ECE445-FA21-Solar/blob/main/team%20documents/ECE%20445%20Team%2010%20Final%20Report.pdf)
 
 ## 12/09/2021: Updating GitHub and Wrapping Up Class
-**Objectives:** 
+**Objectives:** Update all of GitHub for documentation; Complete remaining ECE 445 assignments and formalities 
 
-**Outcome:** 
+**Outcome:** Now that all of our major deadlines for ECE 445 had been completed, we completed checkout and final formalities for the class as a team. I also took this chance to completely update this entire repository with all of our code and final class documentation, along with updates to Sydney's and my online notebooks. Please refer to the respective folders from the top-level of this repository for the complete layout. \
+This class and this project have been a great experience, and I hope that this repository can be used as the foundation to either continue and improve this project, or as the basis of an innovative tangent! 
