@@ -21,7 +21,23 @@
 [10/28/2021 - 10/29/2021: Completing Design for Django Back-end and Microcontroller Programming](#10282021---10292021-completing-design-for-django-back-end-and-microcontroller-programming) \
 [10/31/2021 - 11/01/2021: Individual Progress Report Completion](#10312021---11012021-individual-progress-report-completion) \
 [11/04/2021: Real-time Django Data Updates Research](#11042021-real-time-django-data-updates-research) \
-[11/07/2021: ESP-32 Wireless Capabilities Programming](#11072021-esp-32-wireless-capabilities-programming) 
+[11/07/2021: ESP-32 Wireless Capabilities Programming](#11072021-esp-32-wireless-capabilities-programming) \
+[11/09/2021: Completing ESP-32 Stand-alone Wireless Programming](#11092021-completing-esp-32-stand-alone-wireless-programming) \
+[11/11/2021: Working on Django Framework Back-end](#11112021-working-on-django-framework-back-end) \
+[11/13/2021: Codebase Clean-up and Integrating Django Applications](#11132021-codebase-clean-up-and-integrating-django-applications) \
+[11/14/2021: Django-ESP32 Wireless Communication Integration](#11142021-django-esp32-wireless-communication-integration) \
+[11/18/2021: Researching Final Components of Software Subsystem](#11182021-researching-final-components-of-software-subsystem) \
+[11/22/2021: Beginning Firmware Work and Hardware Integration](#11222021-beginning-firmware-work-and-hardware-integration) \
+[11/23/2021: Continuing Firmware Work and Hardware Integration (1)](#11232021-continuing-firmware-work-and-hardware-integration-1) \
+[11/24/2021: Continuing Firmware Work and Hardware Integration (2)](#11242021-continuing-firmware-work-and-hardware-integration-2) \
+[11/29/2021: Continuing Firmware Work and Hardware Integration (3)](#11292021-continuing-firmware-work-and-hardware-integration-3) \
+[11/30/2021: Continuing Firmware Work and Hardware Integration (4)](#11302021-continuing-firmware-work-and-hardware-integration-4) \
+[12/01/2021: Final Round of Firmware Work and Hardware Debugging](#12012021-final-round-of-firmware-work-and-hardware-debugging) \
+[12/01/2021: Updating Software Functionalities and Completing Planned Integration Testing](#12012021-updating-software-functionalities-and-completing-planned-integration-testing) \
+[12/02/2021: Final Software and Firmware Work as well as Completing Demo](#12022021-final-software-and-firmware-work-as-well-as-completing-demo) \
+[12/05/2021 - 12/06/2021: Final Presentation Preparation and Completion](#12052021---12062021-final-presentation-preparation-and-completion) \
+[12/07/2021 - 12/08/2021: Final Report Completion](#12072021---12082021-final-report-completion) \
+[12/09/2021: Updating GitHub and Wrapping Up Class](#12092021-updating-github-and-wrapping-up-class)
 
 ## 08/26/2021 - 08/29/2021: Team Finding 
 **Objectives:** Find a team and establish line of communication. Finalize an idea and approach to groupwork, as well as begin working on RFA. 
@@ -164,9 +180,9 @@ The final reviewed draft of our Design Document can be found within this reposit
   * https://lastminuteengineers.com/creating-esp32-web-server-arduino-ide/
 
 ## 10/11/2021: Plan Integration and discuss with Teammates  
-**Objectives:** Assess coding put together, discuss parts and PCB integration from hardware point of view (catch up)
+**Objectives:** Assess coding to be done and integrated, discuss firmware design as a team and plan it out
 
-**Outcome:** ++
+**Outcome:** Since till now I have been focusing on the purely sotfware side of the project, I set up a meeting with Sydney and Maram to discuss how we would connect the hardware and software sides of the project along with what we need to focus on with regards to firmware. From a software point of view we agreed I could continue as I was doing since the entirerty of the software could be completed as planned and then just the stand-alone testing when put into the PCB after integrating firmware code wsa needed. As for the firmware side, since we do not have all the parts we ordered, at the moment we can only plan for when they come. I explained what aspects of the ESP32 microcontroller programming Sydney and Maram can look into in advance, and we also discussed how they could complete testing of the parts in isolation before any firmware or integration work. Overall, I think we have a good plan to move forward considering the delay in PCB order and in receiving our parts. 
 
 ## 10/19/2021: Post Design Submission Update Meeting with TA  
 **Objectives:** Discuss our progress so far on our board layout and the planned approach for software capabilties with TA Evan 
@@ -265,69 +281,79 @@ I now need to work on completing configuring the HTTP network functionalities on
 ## 11/09/2021: Completing ESP-32 Stand-alone Wireless Programming 
 **Objectives:** Finish writing the code for the 2-way POST capabilities of the microcontroller 
 
-**Outcome:** base testing as well as 2-way, 
+**Outcome:** base testing, 2-way
 
 ## 11/11/2021: Working on Django Framework Back-end
-**Objectives:** 
+**Objectives:** Begin working on and establish the base for the Django back-end, including initial work for HTTP commuication and modular testing 
 
-**Outcome:** Setting up DB side, writing POST (entire pathway structure implementation), testing 
+**Outcome:** back-end - Setting up DB side, writing POST (entire pathway structure implementation), testing 
 
-## 11/13/2021: Cleaning up 
-**Objectives:** 
+## 11/13/2021: Codebase Clean-up and Integrating Django Applications
+**Objectives:** Review all of the existing codebase, update GitHub after changes; Finalize working details of Django front-end
 
-**Outcome:** Combining pages for Django, ++
+**Outcome:** Combining pages for Django successfully (2 pics), adjusting code for not working stuff, 
 
 ## 11/14/2021: Django-ESP32 Wireless Communication Integration 
 **Objectives:** Integration testing as in Design plan ++
 
-**Outcome:** Issues converting POST on ESP32, 
+**Outcome:** Issues converting POST on ESP32
 
-## 11/18/2021: Software personal 
-**Objectives:** 
+## 11/18/2021: Researching Final Components of Software Subsystem  
+**Objectives:** Folowing our last meeting with TA Evan, researching all the "loose end" components of the software side of the project 
 
 **Outcome:** Many to one, dynamic, miscellaneous (GUI) 
 
-## 11/22/2021: Hardware and Software Programming 1 
+## 11/22/2021: Beginning Firmware Work and Hardware Integration
 **Objectives:** 
 
 **Outcome:** OLED Breadboard testing and Programming, Thermocouples (multi) Breadboard testing and Programming, Worked on ADC circuitry and programming 
 
-## 11/23/2021: Hardware and Software Programming 2
+## 11/23/2021: Continuing Firmware Work and Hardware Integration (1)
 **Objectives:** 
 
 **Outcome:** Darlington Array Breadboard testing and programming, continued working on ADC issues, Combining code and stand alone ESP (issues?)
 
-## 11/24/2021: Hardware and Software Programmig 3
+## 11/24/2021: Continuing Firmware Work and Hardware Integration (2)
 **Objectives:** 
 
 **Outcome:** Machine shop (continuation), ++ (soldering, etc. ?) 
 
-## 11/29/2021: Hardware and Software Programming 4
+## 11/29/2021: Continuing Firmware Work and Hardware Integration (3)
 **Objectives:** Fix issues, meet with Evan, Hardware other stuff 
 
 **Outcome:** Fixed ESP stand alone issue, spent time on ADC working, testing on board (issues)
 
-## 11/30/2021: Hardware and Software Programming 5
+## 11/30/2021: Continuing Firmware Work and Hardware Integration (4)
 **Objectives:**  
 
 **Outcome:** Current sensor (calibration), 
 
-## 12/01/2021: Hardware and Software Programming 6
-**Objectives:**  
+## 12/01/2021: Final Round of Firmware Work and Hardware Debugging 
+**Objectives:** 
 
 **Outcome:** again current sensor, voltage measurement, integration with OLED and other stuff (calibration), 
 
-## 12/01/2021: Software Programming 1
-**Objectives:** personal personal  
+## 12/01/2021: Updating Software Functionalities and Completing Planned Integration Testing 
+**Objectives:** 
 
 **Outcome:** ManyToOne, update models, update POST stuff (to website), Esp-to-Django confirm, GUI config (?)
 
-## 12/02/2021: Software Programming 2 and Demo
-**Objectives:** Wrap up, demo, everything in between 
+## 12/02/2021: Final Software and Firmware Work as well as Completing Demo
+**Objectives:** Wrap up, demo, everything in between
+
+**Outcome:** GUI work, testing in lab - wifi comms in lab and final test, Darlington update, demo
+
+## 12/05/2021 - 12/06/2021: Final Presentation Preparation and Completion 
+**Objectives:** 
 
 **Outcome:** 
 
-## 12/03/2021: Presentation and Tech Report Work 
+## 12/07/2021 - 12/08/2021: Final Report Completion
+**Objectives:** 
+
+**Outcome:** 
+
+## 12/09/2021: Updating GitHub and Wrapping Up Class
 **Objectives:** 
 
 **Outcome:** 
