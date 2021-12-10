@@ -340,43 +340,88 @@ During our next meeting with our TA Evan 2 days later, I tried to debug this iss
 ## 11/22/2021: Beginning Firmware Work and Hardware Integration
 **Objectives:** Start working on firmware for the available parts, including testing and any possible integration 
 
-**Outcome:** OLED Breadboard testing and Programming, Thermocouples (multi) Breadboard testing and Programming, Worked on ADC circuitry and programming 
+**Outcome:** Now that we had a lot of the parts for our final project, and also since the PCB was on it's way, Maram and I decided to spend some time individually programming and testing peripheral components that needed to then go onto the PCB. For each of these parts Maram would wire it on an SOIC breadboard, and then I would program it through the ESP32 via the Arduino IDE using a micro-USB cable. The first of these parts was the OLED that would constantly display measurements on the PCB. On initially wiring the OLED, we were facing issues where the ESP32 was not able to communicate with the OLED through the I2C bus as intended. After troubleshooting for some time, we realized that there was the need for pull-up resistors to enable this communication. I was then able to program it through ESP32 GPIO 21 and 22 (I2C bus) to test some random pictures - a still-frame of this can be seen below:
+
+![Screenshot_20211209-224343](https://user-images.githubusercontent.com/46250395/145519433-262a34f5-def3-445a-bf7a-845af68c6c56.png)
+
+We then moved onto the thermocouples which would sense temperature in two areas of the solar panel. This sensor would only need readings sent through a direct ESP32 input pin as the thermocouples themselves (DS18B20) allowed for digital communication. We once again faced a connection issue due to the lack of pull-up resistors, because of which we were getting the reserved value of the sensor for disconnection (-127). But once wired correctly, I was able to program the ESP32 to read sensor values using the *DallasTemperatures* library and the *OneWire* functionality of the ESP32. Given below are two pictures showing the serial monitor output at the ESP32 for one and two thermocouples (respectively) reporting sensed temperatures at the same time. Note that we only needed to use 1 GPIO pin (15) for multiple thermocouples because these sensors sent their device address when reporting as well, allowing for filtering based on device address when data was received. 
+
+![Single Thermocouple Testing](https://user-images.githubusercontent.com/46250395/145519755-0cb96211-83b7-4c89-b46a-b4286794283a.png) \
+![Multiple Thermocouple Testing](https://user-images.githubusercontent.com/46250395/145519760-fd60e473-47e8-4132-82ad-957d42459cd4.png)
+
+Finally, we tried to work on the ADC that would be used to isolate our voltage measuring voltage divider circuit and hence which would relay our voltage measurements to us. But, for whatever reason, we were not able to connect the ADC to the ESP32 - it is meant to use the I2C bus just like the OLED, but similar wiring (as per its documentation) was not being recognized by the master device (ESP32) along the I2C bus. 
 
 ## 11/23/2021: Continuing Firmware Work and Hardware Integration (1)
 **Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole 
 
-**Outcome:** Darlington Array Breadboard testing and programming, continued working on ADC issues, Combining code and stand alone ESP (issues?)
+**Outcome:** In continuation to the firmware and hardware work that was done yesterday, the first part we worked on today was the Darlington Array chip. Once soldered on a surface mount and wired to a breadboard, we used LEDs to test if the right output pins of the darlington were outputting "HIGH" as expected for each configuration. The ESP32 programming itself for this was simply setting analog high and low signals wherever needed based on configuration. The picture below shows the serial monitor output confirming the cycling through of different configurations as we were testing. We were able to successfully show that the darlington array itself was working as expected with my programming, and we decided to test this fully with the relays and layout tomorrow. 
+
+![Relay Config Cycle Testing](https://user-images.githubusercontent.com/46250395/145520502-ff1e00d1-60e1-4f5a-b108-ad3bb1461ae1.png)
+
+We also continued working on trying to fix our ADC issues. The picture below shows the wiring for the ADC to an I2C data line and bus as per its datasheet, and we tried variations of this with different capacitors and resistors in varying sequences. But no matter what was attempted, the ADC was not being recognized along the ESP32 I2C bus, which was proven by an I2C port scanning script I wrote - when only the ADC was connected, no port of the ESP32 I2C saw a device connection. I tried some preliminary approaches to writing and configuring the ADC, but were unsuccessful. We even tried programming the ADC via an Arduino (to see if our logic itself was correct), and failed to see any connection. 
+
+![image](https://user-images.githubusercontent.com/46250395/145518217-1679029b-6134-43bb-b111-00c7e71fa194.png)
+
+Finally, to begin integration, I was able to combine the programming I had done for the thermocouples and the OLED onto the board, and then test the same on a breadboard setting successfully. This at least logically proved that, given our PCB traces were correct, we would be able to integrate 2 of our subsystems (microcontroller and monitoring) in the end. 
 
 ## 11/24/2021: Continuing Firmware Work and Hardware Integration (2)
 **Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole 
 
-**Outcome:** Machine shop (continuation), ++ (soldering, etc. ?) 
+**Outcome:** We started the day by testing the complete layout for the Darlington array chip along with relays as planned. My programming actually stayed the same, and once the wiring was complete to allow for the physical relays and LEDs for verification we could test it. Given below are the 3 still-frame results of our testing - as can be seen, the LEDs were displaying aligned configurations as expected as we cycled through the 3 options that would eventually be implemented. From a logical point of view, this proved the functionality of 1 of our monitoring subsystem requirements (configuraton capability) through testing: 
+
+![image](https://user-images.githubusercontent.com/46250395/145520533-7552532f-8f8e-49d3-9d96-9ac7e24f1052.png)
+
+We also continued to work on and tried to debug our ESP32-ADC connection. The picture below shows the expected waveform outputted by the ADC when being read from along the I2C bus. We tried different variations of tying down address bits at the start that we have control over, and also tried probing the ADC output to see if it was along our expectations, but neither of these approaches were successful. We also unsuccessfully tried to write and reconfigure the ADC. On talking with our TA Evan, he was able to help us show that the clock signal of the ADC on connection to the I2C bus was in fact correct (periodicity seen), but we still need to analyze more into what the data line is sending and why it was not being recognized by the ESP32. 
+
+![image](https://user-images.githubusercontent.com/46250395/145518187-fa87b060-6349-4824-beac-e90985aa0d9a.png)
+
+Finally, as we received our PCB ahead of time, we tried to program the ESP32 and make it work on an independent power supply (stand alone). But, we ran into issues here where the ESP32 was being powered but was not running the programmed code (as evidenced by the on-chip LED blink that I set not working). Furthermore, our PCB's mounting holes were unfortunately not aligned with those within our solar panel mounting boxes (Attaboxes). Because of this we planned to meet with the Machine Shop the next day and get aligned holes drilled in safely. In this time, Sydney was able to come back to campus and begin working on soldering the parts we had verified and programmed onto our PCBs so that we would no be behind schedule. 
 
 ## 11/29/2021: Continuing Firmware Work and Hardware Integration (3)
 **Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole 
 
-**Outcome:** Fixed ESP stand alone issue, spent time on ADC working, testing on board (issues) \
-Fix issues, meet with Evan, Hardware other stuff 
+**Outcome:** Our TA Evan was able to spend some time today helping us fix some of our problems. One of these issues was the aforementioned ESP32 stand-alone inability. But Evan was able to show us that the ESP32 needs to have its enable pin settings such that it can flash and reload the program when being independently powered in order to run. It turned out that when designing the PCB my teammates had tied the ESP32's enable pin to low, which is what was causing our issue. On leaving this pin floating and connecting the programmed ESP32, followed by a power boot, the ESP32 was able to execute as programmed independently! \
+We also spent more time today on sorting out the ADC, and this time with Evan's supervison. We changed our testing approach to see if we were able to manually read based on address from the ADC through ESP32 analog input. While we were able to read through the I2C bus with our earlier wiring itself, these readings were ust default/zero values. \
+testing on board (issues), eading and writing bytes, configure, acknowledgment \
+Machine shop (continuation)
 
 ## 11/30/2021: Continuing Firmware Work and Hardware Integration (4)
 **Objectives:** Continuing to work on testing and firmware integration for available parts, along with PCB testing as a whole
 
-**Outcome:** Current sensor (calibration), 
+**Outcome:** Current sensor (calibration), pull-up resistors and testing 
+
+![image](https://user-images.githubusercontent.com/46250395/145523011-8bf0c5c1-c3b8-41e7-add4-97239b4077c5.png) \
+![Current Sensor 2A](https://user-images.githubusercontent.com/46250395/145523021-74331873-4f19-4dc3-8506-7c1533835dac.png) \
+![Current Sensor 4A](https://user-images.githubusercontent.com/46250395/145523028-f96e8320-f11c-4b01-bea8-7d4fa7f07743.png)
 
 ## 12/01/2021: Final Round of Firmware Work and Hardware Debugging 
 **Objectives:** Finish work on testing and firmware integration for parts as well as PCB testing on my end 
 
-**Outcome:** again current sensor, voltage measurement, integration with OLED and other stuff (calibration), 
+**Outcome:** again current sensor (testing with other sensitivity, and on PCB) , voltage measurement, integration with OLED and other stuff (calibration)
+
+![Fixed Voltage Calibration Plot](https://user-images.githubusercontent.com/46250395/145523093-4e1c93ec-2ac9-4299-904c-96f17eb55a49.jpg) \
+![image](https://user-images.githubusercontent.com/46250395/145523116-3cf66ee1-3f20-4399-be85-50382907798b.png) \
+![image](https://user-images.githubusercontent.com/46250395/145523134-235e1063-564a-4f42-90b4-15488eb1abee.png)
 
 ## 12/01/2021: Updating Software Functionalities and Completing Planned Integration Testing 
 **Objectives:** Work on planned software functionalities and their integration along with all applicable planned testing 
 
 **Outcome:** ManyToOne, update models, update POST stuff (to website), Esp-to-Django confirm, GUI config (?)
 
+<img width="604" alt="ManyToOne-Basic" src="https://user-images.githubusercontent.com/46250395/145523215-a5012efc-f7c9-4d82-9b5f-ebc5409f745f.png"> \
+![ESP32 POST Django Ver](https://user-images.githubusercontent.com/46250395/145523243-6d24134f-992f-4ff3-9c93-c6cdfc198d21.png) \
+![Voltage Plot](https://user-images.githubusercontent.com/46250395/145523284-4329f284-ba08-496f-a952-dc8409ab93f9.png) \
+![Current Plot](https://user-images.githubusercontent.com/46250395/145523295-bc210eb4-f8af-47da-9b34-022613c595e1.png) \
+![Temp Plot](https://user-images.githubusercontent.com/46250395/145523304-e4412d7f-f5a1-46fb-9eb7-e2a5409309b4.png) \
+![ESP32 POST Receive Ver](https://user-images.githubusercontent.com/46250395/145523314-ef67e470-560b-495a-8d45-f766339cc510.png)
+
 ## 12/02/2021: Final Software and Firmware Work as well as Completing Demo
 **Objectives:** Wrap up remaining software and firmware tasks before Final Demo and then complete the Final Demo 
 
 **Outcome:** GUI work, testing in lab - wifi comms in lab and final test, Darlington update, demo
+
+![Config GUI](https://user-images.githubusercontent.com/46250395/145523322-8bd1c37c-2b4d-4d76-b42f-b0ed1e484ce0.png) \
+![Config Confirm](https://user-images.githubusercontent.com/46250395/145523330-7566fa1f-b504-4ffd-8f9f-5e312de469ea.png)
 
 ## 12/05/2021 - 12/06/2021: Final Presentation Preparation and Completion 
 **Objectives:** Put together all the work done for the project in a presentation, and prepare for the same 
